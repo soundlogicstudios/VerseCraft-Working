@@ -1,0 +1,10 @@
+{
+  "stories": [
+    {
+      "id": "demo-welcome",
+      "title": "Demo Welcome",
+      "description": "A tiny test story to confirm Menu → Load → Play → Save works.",
+      "path": "./content/Demo.story.json"
+    }
+  ]
+}
