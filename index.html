@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <title>VerseCraft Foundation</title>
+  <style>
+    :root{
+      --bg:#05060a;
+      --panel:rgba(15,16,22,.78);
+      --panel2:rgba(15,16,22,.92);
+      --text:#e9ecff;
+      --muted:#a6acd6;
+      --btn:#e6e6ea;
+      --btnText:#0b0c10;
+      --accent:#22c55e;
+      --danger:#ef4444;
+      --line:rgba(255,255,255,.12);
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius2:14px;
+      --font:-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+
+    html,body{height:100%; background:var(--bg); margin:0; font-family:var(--font); color:var(--text);}
+    #bg{
+      position:fixed; inset:0;
+      background:
+        radial-gradient(1000px 700px at 40% 20%, rgba(110,145,255,.20), transparent 60%),
+        radial-gradient(900px 600px at 70% 60%, rgba(34,197,94,.14), transparent 55%),
+        radial-gradient(700px 500px at 20% 80%, rgba(168,85,247,.14), transparent 55%),
+        linear-gradient(180deg, #05060a 0%, #090a12 60%, #05060a 100%);
+      filter:saturate(1.1);
+      z-index:0;
+    }
+
+    #toast{
+      position:fixed; top:14px; left:14px; right:14px;
+      z-index:9999;
+      display:none;
+      padding:12px 14px;
+      border-radius:12px;
+      background:var(--accent);
+      color:#001a08;
+      font-weight:800;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    #toast.danger{ background:var(--danger); color:#240102; }
+
+    .screen{
+      position:relative; z-index:1;
+      min-height:100%;
+      display:none;
+      padding:20px 18px 28px;
+      box-sizing:border-box;
+    }
+    .screen.active{display:block;}
+    .wrap{
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+
+    .menuHero{
+      padding:26px 18px 22px;
+      text-align:center;
+    }
+    .logo{
+      font-size:44px;
+      font-weight:900;
+      letter-spacing:.5px;
+      margin: 6px 0 6px;
+    }
+    .tag{
+      color:var(--muted);
+      font-weight:600;
+      margin-bottom:18px;
+    }
+    .btnCol{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      padding:0 16px 22px;
+    }
+    button{
+      appearance:none; -webkit-appearance:none;
+      border:none;
+      border-radius:18px;
+      height:58px;
+      font-size:18px;
+      font-weight:800;
+      background:var(--btn);
+      color:var(--btnText);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      cursor:pointer;
+    }
+    button:active{ transform: translateY(1px); }
+    button.secondary{ background: rgba(255,255,255,.14); color: var(--text); border:1px solid var(--line); }
+    button.disabled{ opacity:.55; cursor:not-allowed; }
+
+    .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      padding:14px 16px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:14px 14px;
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin-bottom:14px;
+    }
+    .topbar .title{
+      font-weight:900;
+      letter-spacing:.2px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .story{
+      padding:18px 16px 16px;
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      margin-bottom:14px;
+    }
+    .story p{
+      margin:0;
+      line-height:1.55;
+      font-size:16px;
+      color:var(--text);
+      white-space:pre-wrap;
+    }
+
+    .choices{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .choiceBtn{
+      height:auto;
+      padding:14px 14px;
+      border-radius:16px;
+      text-align:left;
+      line-height:1.35;
+    }
+
+    /* Modal */
+    #modalMask{
+      position:fixed; inset:0;
+      z-index:5000;
+      display:none;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding:18px;
+      box-sizing:border-box;
+    }
+    #modalMask.active{ display:flex; align-items:center; justify-content:center; }
+    #modal{
+      width:min(760px, 100%);
+      max-height:min(78vh, 680px);
+      overflow:auto;
+      background: var(--panel2);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .modalHead{
+      position:sticky; top:0;
+      background: rgba(10,12,18,.92);
+      border-bottom:1px solid var(--line);
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .modalHead .h{
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .modalList{
+      padding:12px 12px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .storyCard{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.06);
+      padding:12px 12px;
+    }
+    .storyCard .t{ font-weight:900; margin-bottom:4px; }
+    .storyCard .s{ color:var(--muted); font-weight:700; font-size:13px; margin-bottom:10px; }
+    .storyCard .meta{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+    .storyCard .meta .pill{ font-size:11px; padding:6px 8px; }
+    .storyCard button{ width:100%; height:48px; border-radius:14px; }
+  </style>
+</head>
+
+<body>
+  <div id="bg"></div>
+  <div id="toast"></div>
+
+  <!-- MENU -->
+  <section id="screenMenu" class="screen active">
+    <div class="wrap">
+      <div class="card">
+        <div class="menuHero">
+          <div class="logo">VerseCraft</div>
+          <div class="tag">Your Choices, Your RPG, Your Story.</div>
+        </div>
+
+        <div class="btnCol">
+          <button id="btnStart">Start</button>
+          <button id="btnLoad">Load Story</button>
+          <button id="btnContinue" class="secondary disabled">Continue</button>
+        </div>
+
+        <div class="row">
+          <div id="statusLeft">Foundation v0</div>
+          <div id="statusRight">Ready</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section id="screenGame" class="screen">
+    <div class="wrap">
+      <div class="topbar">
+        <div class="title" id="gameTitle">Story</div>
+        <div class="pill" id="gameMeta">HP 10 • LV 1</div>
+        <button id="btnMenu" class="secondary" style="height:38px; padding:0 12px; border-radius:12px; font-size:14px; font-weight:900;">Menu</button>
+      </div>
+
+      <div class="story">
+        <p id="storyText"></p>
+      </div>
+
+      <div class="choices" id="choices"></div>
+    </div>
+  </section>
+
+  <!-- STORY PICKER MODAL -->
+  <div id="modalMask" role="dialog" aria-modal="true" aria-label="Story Picker">
+    <div id="modal">
+      <div class="modalHead">
+        <div class="h">Load New Story</div>
+        <button id="btnCloseModal" class="secondary" style="height:38px; padding:0 12px; border-radius:12px; font-size:14px; font-weight:900;">Close</button>
+      </div>
+      <div class="modalList" id="storyList"></div>
+    </div>
+  </div>
+
+  <script>
+    // =========================
+    // VerseCraft Foundation v0
+    // Single-file baseline
+    // =========================
+
+    // --- Demo Stories (embedded). Phase 2 swaps to stories.json + external story files.
+    const STORIES = [
+      {
+        id: "lorecraft_tutorial",
+        title: "Lorecraft Tutorial",
+        subtitle: "The World That Notices",
+        tags: ["Tutorial","Demo"],
+        estimate: "5–10 min",
+        nodes: {
+          "start": {
+            text:
+`You wake in a quiet place that feels like a page before ink.
+
+A voice says: “This is VerseCraft. You’re not just reading. You’re driving.”
+
+Choose your first move.`,
+            choices: [
+              { text: "Check your stats", to: "stats" },
+              { text: "Open your pack", to: "pack" },
+              { text: "Walk into the fog", to: "fog" }
+            ]
+          },
+          "stats": {
+            text:
+`WEALTH (demo):
+WIS 2 • END 2 • AGI 2 • LUCK 2 • TIM 2
+HP 10 • LV 1
+
+This is a foundation build — mechanics come next.`,
+            choices: [
+              { text: "Back", to: "start" },
+              { text: "Walk into the fog", to: "fog" }
+            ]
+          },
+          "pack": {
+            text:
+`Your pack contains:
+• A cracked compass
+• One ration
+• A note: “Make the engine boring. Make the stories exciting.”`,
+            choices: [
+              { text: "Eat the ration (save)", to: "save_demo" },
+              { text: "Back", to: "start" }
+            ]
+          },
+          "save_demo": {
+            text:
+`You eat the ration and feel… slightly more real.
+
+(Saving now.)`,
+            choices: [
+              { text: "Continue", to: "fog" }
+            ],
+            effect: (state) => {
+              state.flags.ate = true;
+              state.hp = Math.min(10, state.hp + 1);
+            }
+          },
+          "fog": {
+            text:
+`The fog parts. A doorway appears with three words carved into it:
+
+IMPORT • VALIDATE • PLAY
+
+That’s the whole product.`,
+            choices: [
+              { text: "End (Good)", to: "end_good" },
+              { text: "Back to menu", to: "__menu__" }
+            ]
+          },
+          "end_good": {
+            text:
+`GOOD ENDING:
+You built a foundation that doesn’t fight you.
+
+Next: load real story JSON and enforce contracts.`,
+            choices: [
+              { text: "Back to menu", to: "__menu__" }
+            ]
+          }
+        }
+      },
+
+      {
+        id: "oregon_trail",
+        title: "Oregon Trail",
+        subtitle: "A Short Survival Run",
+        tags: ["Survival","Demo"],
+        estimate: "5–10 min",
+        nodes: {
+          "start": {
+            text:
+`You hitch the wagon at sunrise. The trail is a promise and a threat.
+
+Do you push hard or play it safe?`,
+            choices: [
+              { text: "Push hard", to: "hard" },
+              { text: "Play it safe", to: "safe" }
+            ]
+          },
+          "hard": {
+            text:
+`The wheels bite into mud. You gain distance but lose breath.
+
+HP -1`,
+            choices: [
+              { text: "Camp", to: "camp" }
+            ],
+            effect: (state)=>{ state.hp = Math.max(0, state.hp - 1); }
+          },
+          "safe": {
+            text:
+`You take your time. The team holds steady.
+
+You keep your strength.`,
+            choices: [
+              { text: "Camp", to: "camp" }
+            ]
+          },
+          "camp": {
+            text:
+`Night falls. You hear coyotes. Your fire pops like dice.
+
+Continue tomorrow?`,
+            choices: [
+              { text: "Save & sleep", to: "__menu__" }
+            ]
+          }
+        }
+      }
+    ];
+
+    // --- UI helpers
+    const $ = (sel, r=document) => r.querySelector(sel);
+    const toastEl = $("#toast");
+    function toast(msg, type="ok", ms=2200){
+      toastEl.classList.toggle("danger", type==="danger");
+      toastEl.textContent = msg;
+      toastEl.style.display = "block";
+      clearTimeout(toastEl._t);
+      toastEl._t = setTimeout(()=> toastEl.style.display="none", ms);
+    }
+
+    function showScreen(name){
+      $("#screenMenu").classList.toggle("active", name==="menu");
+      $("#screenGame").classList.toggle("active", name==="game");
+    }
+
+    // --- Save format (stable)
+    const SAVE_KEY = "vc_save_v0";
+
+    function loadSave(){
+      try{
+        const raw = localStorage.getItem(SAVE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      }catch(e){
+        return null;
+      }
+    }
+    function writeSave(save){
+      localStorage.setItem(SAVE_KEY, JSON.stringify(save));
+    }
+    function clearSave(){
+      localStorage.removeItem(SAVE_KEY);
+    }
+
+    // --- Engine State
+    const state = {
+      storyId: null,
+      nodeId: null,
+      hp: 10,
+      lv: 1,
+      flags: {}
+    };
+
+    function updateContinueButton(){
+      const s = loadSave();
+      const btn = $("#btnContinue");
+      const has = !!(s && s.storyId && s.nodeId);
+      btn.classList.toggle("disabled", !has);
+      btn.disabled = !has;
+      $("#statusRight").textContent = has ? "Continue available" : "No save yet";
+    }
+
+    function openModal(){
+      $("#modalMask").classList.add("active");
+      renderStoryList();
+    }
+    function closeModal(){
+      $("#modalMask").classList.remove("active");
+    }
+
+    function renderStoryList(){
+      const list = $("#storyList");
+      list.innerHTML = "";
+      STORIES.forEach(st => {
+        const el = document.createElement("div");
+        el.className = "storyCard";
+        el.innerHTML = `
+          <div class="t">${escapeHtml(st.title)}</div>
+          <div class="s">${escapeHtml(st.subtitle || "")}</div>
+          <div class="meta">
+            ${(st.tags||[]).map(t=>`<span class="pill">${escapeHtml(t)}</span>`).join("")}
+            ${st.estimate ? `<span class="pill">${escapeHtml(st.estimate)}</span>` : ""}
+          </div>
+          <button data-load="${escapeHtml(st.id)}">Play This Story</button>
+        `;
+        list.appendChild(el);
+      });
+
+      list.querySelectorAll("button[data-load]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const id = btn.getAttribute("data-load");
+          closeModal();
+          startStory(id, "start");
+        });
+      });
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    function getStory(storyId){
+      return STORIES.find(s => s.id === storyId) || null;
+    }
+
+    function getNode(storyId, nodeId){
+      const st = getStory(storyId);
+      if(!st) return null;
+      return st.nodes[nodeId] || null;
+    }
+
+    function saveProgress(){
+      if(!state.storyId || !state.nodeId) return;
+      writeSave({
+        v: 0,
+        storyId: state.storyId,
+        nodeId: state.nodeId,
+        hp: state.hp,
+        lv: state.lv,
+        flags: state.flags
+      });
+      updateContinueButton();
+    }
+
+    function startStory(storyId, nodeId){
+      const st = getStory(storyId);
+      if(!st){ toast("Story not found: " + storyId, "danger"); return; }
+
+      // Reset state for a clean run (you can later keep meta-progression if desired)
+      state.storyId = storyId;
+      state.nodeId = nodeId;
+      state.hp = 10;
+      state.lv = 1;
+      state.flags = {};
+
+      showScreen("game");
+      renderGame();
+      toast("Loaded: " + st.title);
+    }
+
+    function continueStory(){
+      const s = loadSave();
+      if(!s){ toast("No save found", "danger"); return; }
+      state.storyId = s.storyId;
+      state.nodeId = s.nodeId;
+      state.hp = Number.isFinite(s.hp) ? s.hp : 10;
+      state.lv = Number.isFinite(s.lv) ? s.lv : 1;
+      state.flags = s.flags || {};
+      showScreen("game");
+      renderGame();
+      toast("Continuing…");
+    }
+
+    function goMenu(){
+      showScreen("menu");
+      closeModal();
+      updateContinueButton();
+    }
+
+    function renderGame(){
+      const st = getStory(state.storyId);
+      const node = getNode(state.storyId, state.nodeId);
+
+      if(!st || !node){
+        toast("Missing node. Returning to menu.", "danger");
+        goMenu();
+        return;
+      }
+
+      $("#gameTitle").textContent = st.title;
+      $("#gameMeta").textContent = `HP ${state.hp} • LV ${state.lv}`;
+
+      $("#storyText").textContent = node.text || "";
+
+      const choicesWrap = $("#choices");
+      choicesWrap.innerHTML = "";
+
+      const choices = Array.isArray(node.choices) ? node.choices : [];
+      if(!choices.length){
+        const b = document.createElement("button");
+        b.className = "choiceBtn secondary";
+        b.textContent = "Back to menu";
+        b.addEventListener("click", goMenu);
+        choicesWrap.appendChild(b);
+      } else {
+        choices.forEach(ch => {
+          const b = document.createElement("button");
+          b.className = "choiceBtn";
+          b.textContent = ch.text || "Continue";
+          b.addEventListener("click", () => {
+            // Special pseudo-target: return to menu
+            if(ch.to === "__menu__"){
+              saveProgress();
+              goMenu();
+              return;
+            }
+
+            // Apply optional node effect before moving
+            if(typeof node.effect === "function"){
+              try{ node.effect(state); }catch(e){}
+            }
+
+            const next = getNode(state.storyId, ch.to);
+            if(!next){
+              toast("Bad link → " + ch.to, "danger");
+              return;
+            }
+
+            state.nodeId = ch.to;
+            saveProgress();
+            renderGame();
+          });
+          choicesWrap.appendChild(b);
+        });
+      }
+
+      // Always save on render after state changes
+      saveProgress();
+    }
+
+    // --- Wire UI
+    $("#btnStart").addEventListener("click", () => {
+      // Default: first story in list
+      startStory(STORIES[0].id, "start");
+    });
+
+    $("#btnLoad").addEventListener("click", () => openModal());
+
+    $("#btnContinue").addEventListener("click", () => {
+      if($("#btnContinue").disabled) return;
+      continueStory();
+    });
+
+    $("#btnMenu").addEventListener("click", () => goMenu());
+
+    $("#btnCloseModal").addEventListener("click", closeModal);
+    $("#modalMask").addEventListener("click", (e)=>{ if(e.target === $("#modalMask")) closeModal(); });
+
+    // Init
+    updateContinueButton();
+    toast("FOUNDATION LOADED");
+  </script>
+</body>
+</html>
