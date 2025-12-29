@@ -7,7 +7,7 @@ import { validateStory, createNewGameState, getCurrentNode, isChoiceAvailable, c
 import { listSaveSlots, saveToSlot, loadFromSlot, clearSlot } from "./Storage.js";
 
 const el = bindUiElements();
-
+ 
 const app = {
   stories: [],
   selectedStoryId: null,
