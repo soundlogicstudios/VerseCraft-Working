@@ -93,6 +93,44 @@ function wireEvents() {
 
   el.btnCloseModal.addEventListener("click", () => closeModal(el));
   el.modalOverlay.addEventListener("click", (e) => { if (e.target === el.modalOverlay) closeModal(el); });
+// iOS Safari reliability: capture-phase fallback for modal taps.
+// Place this directly AFTER the block where you wire:
+// - el.btnOpenSaves.addEventListener(...)
+// - el.btnCloseModal.addEventListener(...)
+// - el.modalOverlay.addEventListener(...)
+(function installModalTapFallback() {
+  // prevent double-install if init runs more than once
+  if (el._modalTapFallbackInstalled) return;
+  el._modalTapFallbackInstalled = true;
+
+  const onTapCapture = (e) => {
+    // Only care if modal overlay is currently visible
+    if (!el.modalOverlay || el.modalOverlay.hidden) return;
+
+    const t = e.target;
+
+    // Close button (id matches your index.html: BtnCloseModal)
+    if (t && t.closest && t.closest("#BtnCloseModal")) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal(el);
+      return;
+    }
+
+    // Tap on overlay background itself (not inside the modal card)
+    if (t === el.modalOverlay) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeModal(el);
+      return;
+    }
+  };
+
+  // Capture phase beats other handlers that might stop propagation.
+  document.addEventListener("pointerup", onTapCapture, { capture: true });
+  document.addEventListener("touchend", onTapCapture, { capture: true });
+  document.addEventListener("click", onTapCapture, { capture: true });
+})();
 }
 
 async function refreshStoryIndex() {
