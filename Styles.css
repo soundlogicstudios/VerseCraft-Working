@@ -166,8 +166,19 @@ button:disabled {
   outline: 4px solid red;
 }
 
-/* CRITICAL: hidden must fully remove overlay */
+/* HARD KILL: when hidden, overlay cannot intercept taps */
 #ModalOverlay[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* SAFETY: even if display glitches, hidden overlay can't eat taps */
+#ModalOverlay {
+  pointer-events: none;
+}
+#ModalOverlay:not([hidden]) {
+  pointer-events: auto;
+}{
   display: none !important;
 }
 
