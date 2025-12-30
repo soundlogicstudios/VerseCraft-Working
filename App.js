@@ -33,8 +33,40 @@ const app = {
   state: null,
   maxSaveSlots: 3
 };
+// =====================
+// DEBUG CONSOLE (iOS)
+// =====================
+(function installDebugPanel() {
+  if (window.__VC_DEBUG__) return;
+  window.__VC_DEBUG__ = true;
 
-boot().catch(err => fatal(err));
+  const panel = document.createElement("div");
+  panel.style.cssText = `
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 40%;
+    overflow: auto;
+    background: rgba(0,0,0,0.85);
+    color: #0f0;
+    font: 12px monospace;
+    padding: 6px;
+    z-index: 99999;
+  `;
+  panel.id = "VC_DEBUG_PANEL";
+  panel.innerHTML = "<div><strong>VerseCraft DEBUG</strong></div>";
+  document.body.appendChild(panel);
+
+  window.VC_LOG = (msg) => {
+    const line = document.createElement("div");
+    line.textContent = msg;
+    panel.appendChild(line);
+    panel.scrollTop = panel.scrollHeight;
+  };
+
+  VC_LOG("DEBUG PANEL MOUNTED");
+})();boot().catch(err => fatal(err));
 
 async function boot() {
   wireEvents();
