@@ -1,3 +1,4 @@
+document.title = "VC BUNDLE LOADED";
 alert("APP.BUNDLE.JS EXECUTING");
 // Ui.js
 // DOM + rendering only. No game logic, no storage, no fetch.
