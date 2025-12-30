@@ -93,12 +93,7 @@ function wireEvents() {
 
   el.btnCloseModal.addEventListener("click", () => closeModal(el));
   el.modalOverlay.addEventListener("click", (e) => { if (e.target === el.modalOverlay) closeModal(el); });
-// iOS Safari reliability: capture-phase fallback for modal taps.
-// Place this directly AFTER the block where you wire:
-// - el.btnOpenSaves.addEventListener(...)
-// - el.btnCloseModal.addEventListener(...)
-// - el.modalOverlay.addEventListener(...)
-(function installModalTapFallback() {
+ {
   
   const onTapCapture = (e) => {
     // Only care if modal overlay is currently visible
