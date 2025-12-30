@@ -163,7 +163,7 @@ button:disabled {
   padding: 18px;
   z-index: 9999;
   pointer-events: auto;
-  outline: 4px solid red;
+  
 }
 
 /* HARD KILL: when hidden, overlay cannot intercept taps */
