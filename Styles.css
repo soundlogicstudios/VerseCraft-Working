@@ -323,6 +323,8 @@ code {
   display: grid;
   place-items: center;
   padding: 18px;
+  /* Only target the modal overlay */
+#ModalOverlay[hidden] { display: none !important; }
 
   /* ✅ critical for iOS Safari tap reliability */
   z-index: 9999;
