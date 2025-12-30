@@ -1,4 +1,4 @@
-alert("APP.JS EXECUTING — TOP OF FILE");// App.js
+document.documentElement.dataset.vcBoot = "YES_" + Date.now();alert("APP.JS EXECUTING — TOP OF FILE");// App.js
 // Boot + routing + event wiring. UI glue only.
 
 import {
