@@ -1,4 +1,4 @@
-// App.js
+alert("APP.JS EXECUTING — TOP OF FILE");// App.js
 // Boot + routing + event wiring. UI glue only.
 
 import {
