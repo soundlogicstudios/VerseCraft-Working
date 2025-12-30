@@ -126,10 +126,10 @@ function wireEvents() {
     }
   };
 
-  // Capture phase beats other handlers that might stop propagation.
-  document.addEventListener("pointerup", onTapCapture, { capture: true });
-  document.addEventListener("touchend", onTapCapture, { capture: true });
-  document.addEventListener("click", onTapCapture, { capture: true });
+  // Install capture-phase listeners for iOS Safari
+document.addEventListener("pointerup", onTapCapture, { capture: true });
+document.addEventListener("touchend", onTapCapture, { capture: true });
+document.addEventListener("click", onTapCapture, { capture: true });
 })();
 }
 
