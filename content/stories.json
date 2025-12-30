@@ -1,0 +1,9 @@
+{
+  "stories": [
+    {
+      "id": "example",
+      "title": "Example Story",
+      "description": "Starter test story"
+    }
+  ]
+}
