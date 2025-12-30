@@ -1,0 +1,112 @@
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: #0b0f18;
+  color: #e8eefc;
+}
+
+.vc-app{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  gap: 12px;
+}
+
+.vc-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.vc-brand{ display: flex; flex-direction: column; line-height: 1.1; }
+.vc-title{ font-weight: 700; font-size: 18px; letter-spacing: 0.2px; }
+.vc-subtitle{ font-size: 12px; opacity: 0.85; margin-top: 3px; }
+
+.vc-main{ flex: 1; }
+.vc-footer{ font-size: 12px; opacity: 0.75; padding-bottom: 6px; }
+
+/* Critical: hide inactive screens */
+.vc-screen{ display: none !important; }
+.vc-screen.is-active{ display: block !important; }
+
+.vc-card{
+  border: 1px solid rgba(232, 238, 252, 0.14);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.vc-h1{ margin: 0 0 8px 0; font-size: 22px; }
+.vc-h2{ margin: 0; font-size: 18px; }
+.vc-p{ margin: 8px 0 0 0; line-height: 1.4; }
+.vc-p--muted{ opacity: 0.85; }
+
+.vc-stack{ display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.vc-row{ display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.vc-row--space{ justify-content: space-between; }
+
+.vc-btn{
+  border: 1px solid rgba(232, 238, 252, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8eefc;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  touch-action: manipulation;
+}
+.vc-btn:active{ transform: translateY(1px); }
+.vc-btn--ghost{ background: transparent; }
+.vc-btn--small{ padding: 8px 10px; font-size: 14px; border-radius: 9px; }
+.vc-btn--disabled, .vc-btn:disabled{ opacity: 0.5; cursor: default; }
+
+.vc-list{ list-style: none; padding: 0; margin: 12px 0 0 0; display: flex; flex-direction: column; gap: 10px; }
+.vc-listItem{
+  border: 1px solid rgba(232, 238, 252, 0.12);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.vc-listItemTitle{ font-weight: 700; }
+.vc-listItemMeta{ font-size: 13px; opacity: 0.85; }
+
+.vc-divider{
+  height: 1px;
+  background: rgba(232, 238, 252, 0.12);
+  margin: 12px 0;
+}
+
+.vc-gameBox{
+  border: 1px solid rgba(232, 238, 252, 0.12);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(0,0,0,0.10);
+  margin-top: 10px;
+}
+
+.vc-status{
+  font-size: 12px;
+  opacity: 0.85;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(232, 238, 252, 0.14);
+  background: rgba(0,0,0,0.10);
+  white-space: nowrap;
+}
+
+code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+}
