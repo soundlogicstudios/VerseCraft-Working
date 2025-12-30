@@ -323,6 +323,10 @@ code {
   display: grid;
   place-items: center;
   padding: 18px;
+
+  /* ✅ critical for iOS Safari tap reliability */
+  z-index: 9999;
+  pointer-events: auto;
 }
 
 .Modal {
@@ -332,23 +336,21 @@ code {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 14px;
+
+  /* ✅ ensure modal is above overlay and receives touches */
+  z-index: 10000;
+  pointer-events: auto;
+
+  /* optional but helps iOS click/tap feel */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
-.ModalHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.ModalTitle {
-  font-weight: 900;
-  font-size: 18px;
-}
-
-.ModalBody {
-  color: var(--text);
+.ModalActions button,
+.ModalActions .Btn,
+.ModalActions [role="button"] {
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 
 .ModalActions {
