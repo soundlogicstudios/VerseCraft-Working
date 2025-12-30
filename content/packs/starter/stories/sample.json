@@ -1,0 +1,63 @@
+{
+  "title": "Sample Story",
+  "start": "start",
+  "nodes": {
+    "start": {
+      "text": "Sample Story\\n\\nYou wake up in a dark corridor lit by a single flickering panel.",
+      "choices": [
+        {
+          "text": "Open the left hatch",
+          "to": "left"
+        },
+        {
+          "text": "Take the right stairs",
+          "to": "right"
+        }
+      ]
+    },
+    "left": {
+      "text": "A cold draft rolls out. A maintenance tunnel stretches into the distance.",
+      "choices": [
+        {
+          "text": "Keep going",
+          "to": "deep"
+        },
+        {
+          "text": "Go back",
+          "to": "start"
+        }
+      ]
+    },
+    "right": {
+      "text": "The stairs creak. Above, you hear something moving\u2026 then silence.",
+      "choices": [
+        {
+          "text": "Climb faster",
+          "to": "top"
+        },
+        {
+          "text": "Go back",
+          "to": "start"
+        }
+      ]
+    },
+    "deep": {
+      "text": "You find a sealed crate stamped VERSECRAFT. Inside is a note: \u201cPhase 3C confirmed.\u201d",
+      "choices": [
+        {
+          "text": "Return",
+          "to": "start"
+        }
+      ]
+    },
+    "top": {
+      "text": "At the landing, moonlight spills in through a broken skylight. Freedom is close.",
+      "choices": [
+        {
+          "text": "Return",
+          "to": "start"
+        }
+      ]
+    }
+  }
+}
