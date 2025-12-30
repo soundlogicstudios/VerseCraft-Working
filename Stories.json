@@ -1,0 +1,16 @@
+{
+  "stories": [
+    {
+      "id": "sample",
+      "title": "Sample Story",
+      "description": "A tiny two-path demo for Phase 3C testing.",
+      "file": "./content/stories/sample.json"
+    },
+    {
+      "id": "second",
+      "title": "Second Story",
+      "description": "A separate demo so you can confirm swapping between stories works.",
+      "file": "./content/stories/second.json"
+    }
+  ]
+}
