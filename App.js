@@ -57,6 +57,7 @@ const app = {
   panel.id = "VC_DEBUG_PANEL";
   panel.innerHTML = "<div><strong>VerseCraft DEBUG</strong></div>";
   document.body.appendChild(panel);
+alert("DEBUG PANEL INSTALLED");
 
   window.VC_LOG = (msg) => {
     const line = document.createElement("div");
