@@ -99,10 +99,7 @@ function wireEvents() {
 // - el.btnCloseModal.addEventListener(...)
 // - el.modalOverlay.addEventListener(...)
 (function installModalTapFallback() {
-  // prevent double-install if init runs more than once
-  if (el._modalTapFallbackInstalled) return;
-  el._modalTapFallbackInstalled = true;
-
+  
   const onTapCapture = (e) => {
     // Only care if modal overlay is currently visible
     if (!el.modalOverlay || el.modalOverlay.hidden) return;
