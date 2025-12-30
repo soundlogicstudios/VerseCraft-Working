@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>VerseCraft</title>
+  <link rel="stylesheet" href="./Styles.css" />
+</head>
+<body>
+
+  <main class="Screen" id="ScreenMenu">
+    <div class="TopBar">
+      <div class="Brand">
+        <div class="Logo">VC</div>
+        <div>
+          <div class="Title">VerseCraft</div>
+          <div class="Tagline">Your Choices, Your RPG</div>
+        </div>
+      </div>
+      <div>
+        <button class="Btn" id="BtnOpenSaves">Saves</button>
+        <button class="Btn" id="BtnBackToMenu" disabled>Menu</button>
+      </div>
+    </div>
+
+    <div class="Card">
+      <div class="SectionTitle">Main Menu</div>
+      <div class="Divider"></div>
+
+      <div class="HintRow">
+        <div>
+          <div class="Label">Story Library</div>
+          <div class="Hint">Loads from <code>./content/Stories.json</code></div>
+        </div>
+        <button class="Btn BtnGhost" id="BtnRefreshStories">Refresh</button>
+      </div>
+
+      <div id="StoryList"></div>
+
+      <button class="Btn BtnPrimary" id="BtnStartSelected" disabled>Start</button>
+    </div>
+
+    <div class="Hint Footer">Mobile-first • GitHub Pages • No framework</div>
+  </main>
+
+  <main class="Screen" id="ScreenGame" hidden>
+    <div class="TopBar">
+      <div class="Brand">
+        <div class="Logo">VC</div>
+        <div>
+          <div class="Title" id="GameTitle">Story</div>
+          <div class="Tagline" id="GameNode">Node</div>
+        </div>
+      </div>
+      <div>
+        <button class="Btn BtnGhost" id="BtnSaveQuick">Quick Save</button>
+      </div>
+    </div>
+
+    <div class="Card">
+      <div class="StoryText" id="StoryText"></div>
+      <div id="ChoiceList"></div>
+    </div>
+  </main>
+
+  <div id="ModalOverlay" hidden></div>
+
+  <script type="module" src="./App.js?v=FINAL"></script>
+</body>
+</html>
