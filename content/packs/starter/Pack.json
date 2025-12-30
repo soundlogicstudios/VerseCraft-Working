@@ -1,0 +1,34 @@
+{
+  "schema": "versecraft.pack.v1",
+  "packId": "starter",
+  "title": "Starter Pack",
+  "description": "Free starter stories for testing and onboarding.",
+  "version": "1.0.0",
+  "stories": [
+    {
+      "storyId": "sample",
+      "title": "Sample Story",
+      "description": "A tiny two-path demo for Phase 3 testing.",
+      "entryFile": "./content/packs/starter/stories/sample.json",
+      "cover": {
+        "type": "remote",
+        "path": "packs/starter/covers/sample.png"
+      }
+    },
+    {
+      "storyId": "second",
+      "title": "Second Story",
+      "description": "A separate demo to confirm story swapping works.",
+      "entryFile": "./content/packs/starter/stories/second.json",
+      "cover": {
+        "type": "remote",
+        "path": "packs/starter/covers/second.png"
+      }
+    }
+  ],
+  "assets": {
+    "mode": "hybrid",
+    "localBase": "./content/packs/starter/assets/",
+    "remoteBase": "https://soundlogicstudios.github.io/VerseCraft-Media/"
+  }
+}
