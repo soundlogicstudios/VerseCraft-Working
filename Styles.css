@@ -3,6 +3,10 @@
    VerseCraft Styles.css (Safe Reset)
    Mobile-first, iOS Safari safe
    =============================== */
+  /* Overlay must NOT block taps unless it is visible */
+#ModalOverlay { pointer-events: none; }
+#ModalOverlay:not([hidden]) { pointer-events: auto; }
+#ModalOverlay[hidden] { display: none !important; }
 html[data-vc-boot^="YES_"] body::before{
   content: "APP.JS RUNNING";
   position: fixed;
