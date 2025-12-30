@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0b0f18" />
+
+  <title>VerseCraft</title>
+
+  <!-- Canon CSS extracted to external file -->
+  <link rel="stylesheet" href="./Styles.css" />
+</head>
+
+<body>
+  <div class="vc-app" id="app" role="application" aria-label="VerseCraft">
+    <header class="vc-header">
+      <div class="vc-brand">
+        <div class="vc-title">VerseCraft</div>
+        <div class="vc-subtitle">Clean Foundation</div>
+      </div>
+
+      <div class="vc-row" style="justify-content:flex-end;">
+        <div class="vc-status" id="uiStatus" aria-live="polite">Screen: Menu</div>
+        <button class="vc-btn vc-btn--ghost" type="button" id="btnHome" data-action="home" aria-label="Go to Menu">
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main class="vc-main" id="main">
+      <!-- MENU SCREEN -->
+      <section class="vc-screen is-active" id="screenMenu" aria-label="Main Menu">
+        <div class="vc-card">
+          <h1 class="vc-h1">Main Menu</h1>
+          <p class="vc-p">Minimal baseline UI. Next step will load <code>./content/Stories.json</code>.</p>
+
+          <div class="vc-stack">
+            <button class="vc-btn" type="button" id="btnLoadStories" data-action="stories">
+              Load New Story
+            </button>
+            <button class="vc-btn vc-btn--disabled" type="button" id="btnContinue" disabled>
+              Continue Story
+            </button>
+            <button class="vc-btn vc-btn--ghost" type="button" id="btnSettings" data-action="settings">
+              Settings
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STORY LIST SCREEN -->
+      <section class="vc-screen" id="screenStories" aria-label="Story List">
+        <div class="vc-card">
+          <div class="vc-row vc-row--space">
+            <h2 class="vc-h2">Select a Story</h2>
+            <button class="vc-btn vc-btn--ghost" type="button" id="btnBackFromStories" data-action="home">Back</button>
+          </div>
+
+          <ul class="vc-list" id="storyList" aria-label="Available Stories">
+            <li class="vc-listItem">
+              <div class="vc-listItemTitle">Example Story</div>
+              <div class="vc-listItemMeta">Placeholder (will come from Stories.json)</div>
+              <button class="vc-btn vc-btn--small" type="button" id="btnSelectExample" data-action="select-story" data-story-id="example">
+                Select
+              </button>
+            </li>
+          </ul>
+
+          <div class="vc-divider" role="separator" aria-hidden="true"></div>
+
+          <div class="vc-row vc-row--space">
+            <div class="vc-selected" id="selectedStoryText" aria-live="polite">
+              Selected: <strong id="selectedStoryName">None</strong>
+            </div>
+            <button class="vc-btn" type="button" id="btnStart" data-action="start" disabled>
+              Start
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAME SCREEN -->
+      <section class="vc-screen" id="screenGame" aria-label="Game Screen">
+        <div class="vc-card">
+          <div class="vc-row vc-row--space">
+            <h2 class="vc-h2">Game</h2>
+            <button class="vc-btn vc-btn--ghost" type="button" id="btnStoriesFromGame" data-action="stories">Stories</button>
+          </div>
+
+          <div class="vc-gameBox" role="region" aria-label="Game Content">
+            <div class="vc-p" id="gameTitle">No story started.</div>
+            <div class="vc-p vc-p--muted" id="gameBody">
+              When you press <strong>Start</strong>, this screen becomes active. Next step: wire the engine.
+            </div>
+          </div>
+
+          <div class="vc-stack">
+            <button class="vc-btn vc-btn--ghost" type="button" id="btnReturnHome" data-action="home">Return to Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS SCREEN (placeholder) -->
+      <section class="vc-screen" id="screenSettings" aria-label="Settings">
+        <div class="vc-card">
+          <div class="vc-row vc-row--space">
+            <h2 class="vc-h2">Settings</h2>
+            <button class="vc-btn vc-btn--ghost" type="button" id="btnBackFromSettings" data-action="home">Back</button>
+          </div>
+          <p class="vc-p">Settings placeholder. No functionality yet.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="vc-footer" aria-label="Footer">
+      <span class="vc-footerText">VerseCraft • GitHub Pages • iOS Safari baseline</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      function $(id) { return document.getElementById(id); }
+
+      var screens = {
+        menu: $("screenMenu"),
+        stories: $("screenStories"),
+        game: $("screenGame"),
+        settings: $("screenSettings")
+      };
+
+      var uiStatus = $("uiStatus");
+      var selectedStoryId = null;
+      var selectedStoryNameEl = $("selectedStoryName");
+      var startBtn = $("btnStart");
+      var gameTitle = $("gameTitle");
+
+      function setStatus(label) {
+        if (uiStatus) uiStatus.textContent = "Screen: " + label;
+      }
+
+      function showScreen(key) {
+        Object.keys(screens).forEach(function (k) {
+          var active = (k === key);
+          screens[k].classList.toggle("is-active", active);
+        });
+
+        if (key === "menu") setStatus("Menu");
+        else if (key === "stories") setStatus("Stories");
+        else if (key === "game") setStatus("Game");
+        else if (key === "settings") setStatus("Settings");
+      }
+
+      function setSelectedStory(id, name) {
+        selectedStoryId = id;
+        selectedStoryNameEl.textContent = name || "None";
+        startBtn.disabled = !selectedStoryId;
+      }
+
+      function handleAction(action, el) {
+        if (action === "home") { showScreen("menu"); return; }
+        if (action === "stories") { showScreen("stories"); return; }
+        if (action === "settings") { showScreen("settings"); return; }
+
+        if (action === "select-story") {
+          setSelectedStory(el.getAttribute("data-story-id"), "Example Story");
+          return;
+        }
+
+        if (action === "start") {
+          if (!selectedStoryId) return;
+          gameTitle.textContent = "Started: " + selectedStoryNameEl.textContent;
+          showScreen("game");
+          return;
+        }
+      }
+
+      function wireButtons() {
+        // Explicit handlers (most reliable on mobile)
+        var all = document.querySelectorAll("button[data-action]");
+        for (var i = 0; i < all.length; i++) {
+          (function (btn) {
+            btn.addEventListener("click", function (e) {
+              e.preventDefault();
+              var action = btn.getAttribute("data-action");
+              handleAction(action, btn);
+            }, { passive: false });
+          })(all[i]);
+        }
+      }
+
+      function init() {
+        wireButtons();
+        showScreen("menu");
+        setSelectedStory(null, null);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+
+  <!-- App.js will be provided later (story loading + engine). -->
+  <script src="./App.js" defer></script>
+</body>
+</html>
