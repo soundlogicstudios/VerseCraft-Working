@@ -14,10 +14,10 @@
     "consumables": "Supplies"
   },
   "items": {
-    "STETHOSCOPE": { "name": "Stethoscope", "allowedSlots": ["weapon"] },
-    "SCRUBS": { "name": "Scrubs", "allowedSlots": ["armor"] },
-    "LOCKET": { "name": "Locket", "allowedSlots": ["special"] }
-  },
+  "STETHOSCOPE": { "name": "Stethoscope", "allowedSlots": ["weapon"], "stackable": false, "maxOwned": 1 },
+  "SCRUBS": { "name": "Scrubs", "allowedSlots": ["armor"], "stackable": false, "maxOwned": 1 },
+  "LOCKET": { "name": "Locket", "allowedSlots": ["special"], "stackable": false, "maxOwned": 1 }
+},
   "start": "N1",
   "nodes": {
     "N1": {
