@@ -5,7 +5,11 @@
     "title": "Demo Welcome",
     "author": "VerseCraft",
     "version": "1.0.2"
-  },
+  }"loadout": {
+  "equip": { "weapon": "STETHOSCOPE", "armor": "SCRUBS" },
+  "items": ["LOCKET"],
+  "consumables": ["WATER"]
+},
   "equipmentLabels": {
     "weapon": "Tool",
     "armor": "Outfit",
