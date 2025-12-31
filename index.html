@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>VerseCraft</title>
+  <link rel="stylesheet" href="Styles.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <div id="menuBg" class="menuBg" aria-hidden="true">
+      <img id="menuBgImg" class="menuBgImg" src="backgrounds/ui/VerseCraft-Menu_v1.png" alt="" />
+    </div>
+
+    <main id="screenStack" class="screenStack" role="application" aria-label="VerseCraft">
+      <section id="screen-menu" class="screen isActive" data-screen="menu" aria-label="Main Menu">
+        <div id="menuHitboxLayer" class="menuHitboxLayer">
+          <button id="btnMenuLoad" class="menuHitbox" data-hitbox="load" type="button" aria-label="Load New Story"></button>
+          <button id="btnMenuContinue" class="menuHitbox" data-hitbox="continue" type="button" aria-label="Continue Story"></button>
+          <button id="btnMenuSettings" class="menuHitbox" data-hitbox="settings" type="button" aria-label="Settings"></button>
+          <button id="btnMenuDebug" class="menuHitbox" data-hitbox="debug" type="button" aria-label="Debug"></button>
+        </div>
+
+        <div id="menuFallback" class="menuFallback isHidden">
+          <button id="fallbackLoad" class="btn primary" type="button">Load New Story</button>
+          <button id="fallbackContinue" class="btn primary" type="button">Continue Story</button>
+          <button id="fallbackSettings" class="btn utility" type="button">Settings</button>
+          <button id="fallbackDebug" class="btn utility" type="button">Debug</button>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft">VerseCraft</div>
+          <div class="footerRight">v0.1.20</div>
+        </footer>
+      </section>
+
+      <section id="screen-library" class="screen" data-screen="library" aria-label="Story Library">
+        <header class="topBar">
+          <button id="btnBackFromLibrary" class="btn utility" type="button">Back</button>
+          <div class="topBarTitle">Load New Story</div>
+          <div class="topBarRight"></div>
+        </header>
+
+        <div class="contentScroll" id="libraryScroll" role="region" aria-label="Library List">
+          <div id="libraryStatus" class="statusText">Loading catalog…</div>
+          <div id="libraryList" class="libraryList"></div>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft">Library</div>
+          <div class="footerRight">v0.1.20</div>
+        </footer>
+      </section>
+
+      <section id="screen-game" class="screen" data-screen="game" aria-label="Game">
+        <header class="topBar">
+          <button id="btnToMenu" class="btn utility" type="button">Menu</button>
+          <div id="gameTitle" class="topBarTitle">Story</div>
+          <button id="btnOpenSave" class="btn utility" type="button">Save</button>
+        </header>
+
+        <div class="contentScroll" id="gameScroll" role="region" aria-label="Story Text">
+          <article id="storyBody" class="storyBody"></article>
+          <div id="choiceList" class="choiceList" aria-label="Choices"></div>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft" id="footerStoryMeta">—</div>
+          <div class="footerRight">v0.1.20</div>
+        </footer>
+      </section>
+
+      <section id="screen-settings" class="screen" data-screen="settings" aria-label="Settings">
+        <header class="topBar">
+          <button id="btnBackFromSettings" class="btn utility" type="button">Back</button>
+          <div class="topBarTitle">Settings</div>
+          <div class="topBarRight"></div>
+        </header>
+
+        <div class="contentScroll" id="settingsScroll" role="region" aria-label="Settings Content">
+          <div class="settingsBlock">
+            <div class="settingsRow">
+              <div class="settingsLabel">MenuSkin v1 Hitboxes</div>
+              <button id="btnToggleHitboxOutline" class="btn utility" type="button">Toggle Outline</button>
+            </div>
+            <div class="settingsRow">
+              <div class="settingsLabel">Show Fallback Buttons</div>
+              <button id="btnToggleFallback" class="btn utility" type="button">Toggle</button>
+            </div>
+            <hr class="hr" />
+            <div class="settingsRow">
+              <div class="settingsLabel">Clear Save</div>
+              <button id="btnClearSave" class="btn danger" type="button">Clear Save</button>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footerLeft">Settings</div>
+          <div class="footerRight">v0.1.20</div>
+        </footer>
+      </section>
+    </main>
+
+    <div id="modalShade" class="modalShade isHidden" aria-hidden="true"></div>
+    <section id="saveModal" class="modal isHidden" role="dialog" aria-modal="true" aria-label="Save">
+      <header class="modalHeader">
+        <div class="modalTitle">Save / Continue</div>
+        <button id="btnCloseSave" class="btn utility" type="button">Close</button>
+      </header>
+
+      <div class="modalBody">
+        <div class="statusText" id="saveStatus">—</div>
+        <div class="modalRow">
+          <button id="btnQuickSave" class="btn primary" type="button">Quick Save</button>
+          <button id="btnQuickLoad" class="btn primary" type="button">Quick Load</button>
+        </div>
+      </div>
+    </section>
+
+    <button id="debugFab" class="debugFab" type="button" aria-label="Open Debug">Debug</button>
+    <section id="debugPanel" class="debugPanel isHidden" role="dialog" aria-label="Debug Panel">
+      <header class="debugHeader">
+        <div class="debugTitle">Debug</div>
+        <button id="btnCloseDebug" class="btn utility" type="button">Close</button>
+      </header>
+      <div id="debugBody" class="debugBody" role="region" aria-label="Debug Content">
+        <pre id="debugText" class="debugText"></pre>
+      </div>
+    </section>
+  </div>
+
+  <script defer src="App.js"></script>
+</body>
+</html>
