@@ -1,0 +1,1 @@
+/* VerseCraft Clean Foundation - App.js (CANON) v0.0.3 */

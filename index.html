@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>VerseCraft – Clean Foundation</title>
+  <link rel="stylesheet" href="./Styles.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <div class="brand">
+        <div class="title">VerseCraft</div>
+        <div class="subtitle">Clean Foundation</div>
+      </div>
+
+      <div class="topbarRight">
+        <div id="pill" class="pill">
+          <span id="pillText">Screen: Menu</span>
+        </div>
+        <button id="btnTopMenu" class="topBtn" type="button">Menu</button>
+      </div>
+    </div>
+
+    <div id="screenMenu" class="screen">
+      <div class="card">
+        <h1 class="h1">Main Menu</h1>
+        <div class="btnStack">
+          <button id="btnLoadNewStory" class="btn">Load New Story</button>
+          <button id="btnContinueStory" class="btn" disabled>Continue Story</button>
+          <button id="btnSettings" class="btn">Settings</button>
+        </div>
+
+        <div id="debugPanel" class="debugPanel" style="display:none;">
+          <div class="debugHeader">
+            <div class="debugTitle">Debug</div>
+            <label class="debugToggleWrap">
+              <input id="debugToggle" type="checkbox" />
+              <span>Enabled</span>
+            </label>
+          </div>
+          <pre id="debugLog" class="debugLog"></pre>
+        </div>
+      </div>
+    </div>
+
+    <div id="screenCatalog" class="screen">
+      <div class="card">
+        <h1 class="h1">Catalog</h1>
+        <div id="catalogList"></div>
+        <div class="row">
+          <button id="btnCatalogBack" class="topBtn">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screenStories" class="screen">
+      <div class="card">
+        <h1 class="h1">Stories</h1>
+        <div id="storiesList"></div>
+        <div class="row">
+          <button id="btnStoriesBack" class="topBtn">Back</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screenGame" class="screen">
+      <div class="card">
+        <h1 id="gameTitle" class="h1">Game</h1>
+        <p id="gameBody" class="p"></p>
+        <div id="choiceList" class="btnStack"></div>
+      </div>
+    </div>
+
+    <div id="screenSettings" class="screen">
+      <div class="card">
+        <h1 class="h1">Settings</h1>
+        <div class="row">
+          <button id="btnSettingsBack" class="topBtn">Back</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div id="footerVersion" class="footText">VerseCraft v0.0.3</div>
+  </div>
+
+  <script src="./App.js"></script>
+</body>
+</html>
