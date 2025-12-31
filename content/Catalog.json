@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "title": "VerseCraft Catalog",
+  "packs": [
+    {
+      "id": "starter",
+      "title": "Starter Pack",
+      "description": "Free starter stories for testing and onboarding.",
+      "visibility": "public",
+      "price": {
+        "type": "free"
+      },
+      "packVersion": "1.0.0",
+      "packJson": "./content/packs/starter/Pack.json",
+      "manifest": {
+        "type": "local",
+        "path": "./content/packs/starter/Pack.json"
+      }
+    }
+  ]
+}
