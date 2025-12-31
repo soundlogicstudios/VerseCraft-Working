@@ -19,7 +19,7 @@
       "storyId": "second",
       "title": "Second Story",
       "description": "A separate demo to confirm story swapping works.",
-      "entryFile": "./content/packs/starter/stories/second.json",
+      "entryFile": "stories/second.json",
       "cover": {
         "type": "remote",
         "path": "packs/starter/covers/second.png"
