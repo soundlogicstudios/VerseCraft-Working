@@ -1,457 +1,298 @@
-(function () {
+/* VerseCraft Clean Foundation - App.js (CANON)
+   - PillText Contract + Subtle Mode Switch Animation
+   - Debug channel via ?debug=1
+   - Mobile-first, iOS Safari safe
+*/
+
+(() => {
   "use strict";
 
-  function $(id) { return document.getElementById(id); }
+  // ---------------------------
+  // Config
+  // ---------------------------
+  const APP_VERSION = "0.0.2";
+  const DEBUG_ENABLED = new URLSearchParams(window.location.search).has("debug");
 
-  // Screens
-  var screens = {
-    menu: $("screenMenu"),
-    stories: $("screenStories"),
-    game: $("screenGame"),
-    settings: $("screenSettings")
+  // ---------------------------
+  // State
+  // ---------------------------
+  const State = {
+    screen: "Menu", // Menu | Catalog | Packs | Stories | Game | Settings | Debug
+    debug: {
+      enabled: DEBUG_ENABLED,
+      lines: [],
+      maxLines: 120
+    },
+    pill: {
+      mode: "screen",
+      screen: "Menu"
+      // storyTitle, sectionId, chapter optional
+    }
   };
 
-  var uiStatus = $("uiStatus");
+  // ---------------------------
+  // DOM helpers
+  // ---------------------------
+  const $ = (id) => document.getElementById(id);
 
-  // Stories UI
-  var storyListEl = $("storyList");
-  var selectedStoryId = null;
-  var selectedStoryTitle = null;
-  var selectedStoryFile = null;
-
-  var selectedStoryNameEl = $("selectedStoryName");
-  var startBtn = $("btnStart");
-
-  // Game UI
-  var gameTitle = $("gameTitle");
-  var gameBody = $("gameBody");
-
-  // Runtime story state
-  var activeStory = null;
-  var activeNodeId = null;
-
-  // Loaded content state (Catalog/Packs)
-  var activeCatalog = null;
-  var activePack = null;
-
-  // ------------------------
-  // UI helpers
-  // ------------------------
-  function setStatus(label) {
-    if (uiStatus) uiStatus.textContent = "Screen: " + label;
+  function safeText(el, text) {
+    if (!el) return;
+    el.textContent = String(text ?? "");
   }
 
-  function showScreen(key) {
-    Object.keys(screens).forEach(function (k) {
-      var active = (k === key);
-      screens[k].classList.toggle("is-active", active);
+  // ---------------------------
+  // Debug
+  // ---------------------------
+  function debugLog(message, data) {
+    if (!State.debug.enabled) return;
+
+    const time = new Date();
+    const hh = String(time.getHours()).padStart(2, "0");
+    const mm = String(time.getMinutes()).padStart(2, "0");
+    const ss = String(time.getSeconds()).padStart(2, "0");
+
+    let line = `[${hh}:${mm}:${ss}] ${String(message ?? "")}`;
+    if (data !== undefined) {
+      try {
+        const json = JSON.stringify(data);
+        line += ` ${json}`;
+      } catch {
+        line += " [unserializable]";
+      }
+    }
+
+    State.debug.lines.push(line);
+    if (State.debug.lines.length > State.debug.maxLines) {
+      State.debug.lines.splice(0, State.debug.lines.length - State.debug.maxLines);
+    }
+
+    renderDebug();
+  }
+
+  function renderDebug() {
+    const panel = $("debugPanel");
+    const pre = $("debugLog");
+    if (!panel || !pre) return;
+
+    panel.style.display = State.debug.enabled ? "block" : "none";
+    if (!State.debug.enabled) return;
+
+    pre.textContent = State.debug.lines.join("\n");
+  }
+
+  function setDebugEnabled(on) {
+    State.debug.enabled = !!on;
+    debugLog("Debug toggled", { enabled: State.debug.enabled });
+    renderDebug();
+  }
+
+  // ---------------------------
+  // PillText Contract
+  // ---------------------------
+  // Canon state contract:
+  // { mode: "screen", screen: "Menu" | "Catalog" | "Packs" | "Stories" | "Game" | "Settings" | "Debug" }
+  // { mode: "story", storyTitle: string, sectionId: number (1..999), chapter?: number (1..99) }
+  //
+  // Display formats:
+  // Screen: {ScreenName}
+  // {StoryTitle} · §{NNN}
+  // {StoryTitle} · Ch {N} · §{NNN}
+  //
+  // Total pill text target <= 28 chars (truncate StoryTitle only).
+
+  function sanitizeTitle(s) {
+    return String(s ?? "")
+      .replace(/\s+/g, " ")
+      .replace(/[\r\n\t]+/g, " ")
+      .trim();
+  }
+
+  function clampPill(text, maxLen) {
+    if (text.length <= maxLen) return text;
+
+    const sep = " · ";
+    const i = text.indexOf(sep);
+    if (i <= 0) return text.slice(0, maxLen - 1) + "…";
+
+    const title = text.slice(0, i);
+    const suffix = text.slice(i);
+
+    const allowedTitleLen = Math.max(6, maxLen - suffix.length - 1); // keep at least 6 chars of title
+    const truncatedTitle = title.slice(0, allowedTitleLen) + "…";
+    return truncatedTitle + suffix;
+  }
+
+  function renderPillText(pillState) {
+    if (!pillState || pillState.mode === "screen") {
+      const screenName = String(pillState?.screen ?? "Menu");
+      return `Screen: ${screenName}`;
+    }
+
+    // story mode
+    const title = sanitizeTitle(pillState.storyTitle);
+    const section = String(Number(pillState.sectionId || 1)).padStart(3, "0");
+
+    if (pillState.chapter && Number.isInteger(pillState.chapter)) {
+      return clampPill(`${title} · Ch ${pillState.chapter} · §${section}`, 28);
+    }
+
+    return clampPill(`${title} · §${section}`, 28);
+  }
+
+  // Subtle swap animation:
+  // - add .is-swapping (fade out + translate -2px + slight blur)
+  // - after 180ms swap text + classes, remove .is-swapping (fade in)
+  function setPill(nextPillState) {
+    State.pill = { ...nextPillState };
+
+    const pillWrap = $("pill");
+    const pillText = $("pillText");
+    if (!pillWrap || !pillText) return;
+
+    const nextText = renderPillText(State.pill);
+
+    // If reduced motion, swap instantly.
+    const prefersReducedMotion = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      safeText(pillText, nextText);
+      pillWrap.classList.toggle("is-story", State.pill.mode === "story");
+      pillWrap.classList.remove("is-swapping");
+      debugLog("Pill set (reduced motion)", State.pill);
+      return;
+    }
+
+    pillWrap.classList.add("is-swapping");
+
+    window.setTimeout(() => {
+      safeText(pillText, nextText);
+      pillWrap.classList.toggle("is-story", State.pill.mode === "story");
+      pillWrap.classList.remove("is-swapping");
+      debugLog("Pill set", State.pill);
+    }, 180);
+  }
+
+  // ---------------------------
+  // Screen Router (minimal baseline)
+  // ---------------------------
+  function setScreen(name) {
+    State.screen = name;
+
+    // Update pill to SCREEN mode for non-game screens
+    if (name !== "Game") {
+      setPill({ mode: "screen", screen: name });
+    }
+
+    // Toggle screen sections
+    const screens = ["Menu", "Catalog", "Packs", "Stories", "Game", "Settings", "Debug"];
+    for (const s of screens) {
+      const el = $(`screen${s}`);
+      if (el) el.style.display = (s === name) ? "block" : "none";
+    }
+
+    // Update top right "Menu" button visibility
+    const menuBtn = $("btnTopMenu");
+    if (menuBtn) {
+      menuBtn.style.visibility = (name === "Menu") ? "hidden" : "visible";
+    }
+
+    debugLog("Screen changed", { screen: name });
+  }
+
+  // ---------------------------
+  // Button actions (baseline)
+  // ---------------------------
+  function onLoadNewStory() {
+    // In the verified pipeline, this will load content/Catalog.json.
+    // Keeping this button flow stable.
+    setScreen("Catalog");
+    debugLog("Load New Story tapped");
+  }
+
+  function onContinueStory() {
+    debugLog("Continue Story tapped (disabled baseline)");
+  }
+
+  function onSettings() {
+    setScreen("Settings");
+    debugLog("Settings tapped");
+  }
+
+  function onMenu() {
+    setScreen("Menu");
+    debugLog("Menu tapped");
+  }
+
+  // Demo-only helper to show pill switching to story mode (for animation validation)
+  // Can be removed later, but harmless and useful for debugging.
+  function onEnterGameDemo() {
+    setScreen("Game");
+
+    // Switch pill to STORY mode
+    setPill({
+      mode: "story",
+      storyTitle: "Starter Sample",
+      sectionId: 14
     });
 
-    if (key === "menu") setStatus("Menu");
-    else if (key === "stories") setStatus("Stories");
-    else if (key === "game") setStatus("Game");
-    else if (key === "settings") setStatus("Settings");
+    // Display some placeholder game text
+    const title = $("gameTitle");
+    const body = $("gameBody");
+    safeText(title, "Game (Demo)");
+    safeText(body, "This is a demo screen to validate the PillText story mode swap. The real engine will render story sections here.");
+
+    debugLog("Entered Game demo");
   }
 
-  function setSelectedStory(id, title, file) {
-    selectedStoryId = id || null;
-    selectedStoryTitle = title || null;
-    selectedStoryFile = file || null;
-
-    if (selectedStoryNameEl) selectedStoryNameEl.textContent = selectedStoryTitle || "None";
-    if (startBtn) startBtn.disabled = !selectedStoryId;
+  // ---------------------------
+  // Wiring
+  // ---------------------------
+  function wireButton(id, handler) {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      handler();
+    }, { passive: false });
   }
 
-  function setGameText(titleText, bodyHtml) {
-    if (gameTitle) gameTitle.textContent = titleText || "";
-    if (gameBody) gameBody.innerHTML = bodyHtml || "";
-  }
-
-  // ------------------------
-  // Canon button wiring (iOS reliable)
-  // Every button[data-action] gets its own click listener at init.
-  // For dynamic content, we wire newly-rendered buttons and mark them as wired.
-  // ------------------------
-  function wireButtonsWithin(root) {
-    var scope = root || document;
-    var all = scope.querySelectorAll("button[data-action]");
-    for (var i = 0; i < all.length; i++) {
-      var btn = all[i];
-      if (btn.getAttribute("data-vc-wired") === "1") continue;
-      btn.setAttribute("data-vc-wired", "1");
-
-      (function (b) {
-        b.addEventListener("click", function (e) {
-          e.preventDefault();
-          var action = b.getAttribute("data-action");
-          handleAction(action, b);
-        }, { passive: false });
-      })(btn);
-    }
-  }
-
-  // ------------------------
-  // Safety helpers
-  // ------------------------
-  function safeText(x) {
-    if (x === null || x === undefined) return "";
-    return String(x);
-  }
-
-  function escapeHtml(str) {
-    return safeText(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  function escapeAttr(str) {
-    return escapeHtml(str);
-  }
-
-  // ------------------------
-  // Actions
-  // ------------------------
-  function handleAction(action, el) {
-    if (action === "home") { showScreen("menu"); return; }
-    if (action === "stories") { showScreen("stories"); return; }
-    if (action === "settings") { showScreen("settings"); return; }
-
-    if (action === "select-story") {
-      var sid = el.getAttribute("data-story-id") || null;
-      var title = el.getAttribute("data-story-title") || "Untitled Story";
-      var file = el.getAttribute("data-story-file") || null;
-      setSelectedStory(sid, title, file);
-      return;
-    }
-
-    if (action === "start") {
-      if (!selectedStoryId) return;
-
-      showScreen("game");
-      setGameText(
-        "Loading: " + (selectedStoryTitle || "Unknown Story"),
-        "Loading story file…"
-      );
-
-      loadSelectedStoryFile();
-      return;
-    }
-
-    if (action === "choose") {
-      var to = el.getAttribute("data-to") || null;
-      if (!to) return;
-      if (!activeStory) return;
-      renderNode(to);
-      return;
-    }
-  }
-
-  // ------------------------
-  // Catalog & Pack loading (formalized)
-  // ------------------------
-  // Catalog v1:
-  // { schema:"versecraft.catalog.v1", packs:[{packId,title,manifest:{type,path/url}}] }
-  function normalizeCatalog(payload) {
-    if (!payload || typeof payload !== "object") return null;
-    if (!payload.packs || !Array.isArray(payload.packs)) return null;
-    return payload;
-  }
-
-  // Pack v1:
-  // { schema:"versecraft.pack.v1", packId, stories:[{storyId,title,entryFile,description}] }
-  function normalizePack(payload) {
-    if (!payload || typeof payload !== "object") return null;
-    if (!payload.stories || !Array.isArray(payload.stories)) return null;
-    return payload;
-  }
-
-  function resolveManifestPath(manifest) {
-    if (!manifest) return null;
-    var t = safeText(manifest.type || "");
-    if (t === "local") return safeText(manifest.path || "");
-    if (t === "remote") return safeText(manifest.url || "");
-    // tolerant
-    if (manifest.path) return safeText(manifest.path);
-    if (manifest.url) return safeText(manifest.url);
-    return null;
-  }
-
-  function pickDefaultPack(catalog) {
-    // Prefer starter if present, else first.
-    if (!catalog || !Array.isArray(catalog.packs) || !catalog.packs.length) return null;
-
-    for (var i = 0; i < catalog.packs.length; i++) {
-      if (catalog.packs[i] && catalog.packs[i].packId === "starter") return catalog.packs[i];
-    }
-    return catalog.packs[0] || null;
-  }
-
-  function renderStoriesFromPack(pack) {
-    if (!storyListEl) return;
-    if (!pack || !Array.isArray(pack.stories) || !pack.stories.length) return;
-
-    var html = "";
-    for (var i = 0; i < pack.stories.length; i++) {
-      var s = pack.stories[i] || {};
-      var id = safeText(s.storyId || s.id || ("story-" + (i + 1)));
-      var title = safeText(s.title || "Untitled Story");
-      var meta = safeText(s.description || s.subtitle || s.blurb || "");
-      var file = safeText(s.entryFile || s.file || "");
-
-      html += ""
-        + "<li class=\"vc-listItem\">"
-        +   "<div class=\"vc-listItemTitle\">" + escapeHtml(title) + "</div>"
-        +   "<div class=\"vc-listItemMeta\">" + escapeHtml(meta || "Available") + "</div>"
-        +   "<button class=\"vc-btn vc-btn--small\" type=\"button\""
-        +     " data-action=\"select-story\""
-        +     " data-story-id=\"" + escapeAttr(id) + "\""
-        +     " data-story-title=\"" + escapeAttr(title) + "\""
-        +     " data-story-file=\"" + escapeAttr(file) + "\">"
-        +     "Select"
-        +   "</button>"
-        + "</li>";
-    }
-
-    storyListEl.innerHTML = html;
-    wireButtonsWithin(storyListEl);
-
-    // Reset selection when list changes
-    setSelectedStory(null, null, null);
-  }
-
-  function loadCatalogThenPack() {
-    // Canon path (case-sensitive)
-    var catalogUrl = "./content/Catalog.json";
-
-    fetch(catalogUrl, { cache: "no-store" })
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (json) {
-        var cat = normalizeCatalog(json);
-        if (!cat) throw new Error("Bad catalog");
-        activeCatalog = cat;
-
-        var packEntry = pickDefaultPack(cat);
-        if (!packEntry) throw new Error("No packs");
-        var packUrl = resolveManifestPath(packEntry.manifest);
-        if (!packUrl) throw new Error("No manifest");
-
-        return fetch(packUrl, { cache: "no-store" });
-      })
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (json) {
-        var pack = normalizePack(json);
-        if (!pack) throw new Error("Bad pack");
-        activePack = pack;
-
-        renderStoriesFromPack(pack);
-      })
-      .catch(function () {
-        // Safe fallback: keep whatever is already in the list (placeholder),
-        // and ensure existing buttons are wired.
-        wireButtonsWithin(storyListEl);
-
-        // Optional backward-compat fallback: try legacy Stories.json if present.
-        // This allows safe cleanup AFTER you confirm the new pipeline works.
-        tryLoadLegacyStoriesIndex();
-      });
-  }
-
-  // ------------------------
-  // Legacy fallback (temporary safety net)
-  // ------------------------
-  function normalizeLegacyStoriesPayload(payload) {
-    if (!payload) return [];
-    if (Array.isArray(payload)) return payload;
-    if (Array.isArray(payload.stories)) return payload.stories;
-    if (Array.isArray(payload.items)) return payload.items;
-    return [];
-  }
-
-  function renderLegacyStories(stories) {
-    if (!storyListEl) return;
-    if (!stories || !stories.length) return;
-
-    var html = "";
-    for (var i = 0; i < stories.length; i++) {
-      var s = stories[i] || {};
-      var id = safeText(s.id || s.storyId || s.key || ("story-" + (i + 1)));
-      var title = safeText(s.title || s.name || "Untitled Story");
-      var meta = safeText(s.subtitle || s.description || s.blurb || "");
-      var file = safeText(s.file || s.path || s.url || "");
-
-      html += ""
-        + "<li class=\"vc-listItem\">"
-        +   "<div class=\"vc-listItemTitle\">" + escapeHtml(title) + "</div>"
-        +   "<div class=\"vc-listItemMeta\">" + escapeHtml(meta || "Available") + "</div>"
-        +   "<button class=\"vc-btn vc-btn--small\" type=\"button\""
-        +     " data-action=\"select-story\""
-        +     " data-story-id=\"" + escapeAttr(id) + "\""
-        +     " data-story-title=\"" + escapeAttr(title) + "\""
-        +     " data-story-file=\"" + escapeAttr(file) + "\">"
-        +     "Select"
-        +   "</button>"
-        + "</li>";
-    }
-
-    storyListEl.innerHTML = html;
-    wireButtonsWithin(storyListEl);
-    setSelectedStory(null, null, null);
-  }
-
-  function tryLoadLegacyStoriesIndex() {
-    var url = "./content/Stories.json";
-    fetch(url, { cache: "no-store" })
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (json) {
-        var stories = normalizeLegacyStoriesPayload(json);
-        renderLegacyStories(stories);
-      })
-      .catch(function () {
-        // Leave as-is.
-      });
-  }
-
-  // ------------------------
-  // Story loading + node/choices rendering (Phase 3C)
-  // ------------------------
-  function getNodeById(story, nodeId) {
-    if (!story) return null;
-
-    // nodes as object map
-    if (story.nodes && typeof story.nodes === "object" && !Array.isArray(story.nodes)) {
-      return story.nodes[nodeId] || null;
-    }
-
-    // nodes as array
-    if (Array.isArray(story.nodes)) {
-      for (var i = 0; i < story.nodes.length; i++) {
-        var n = story.nodes[i];
-        if (n && n.id === nodeId) return n;
-      }
-    }
-
-    return null;
-  }
-
-  function getStoryTitle(story) {
-    if (story && story.title) return safeText(story.title);
-    return safeText(selectedStoryTitle || "Story");
-  }
-
-  function getStartId(story) {
-    if (story && story.start) return safeText(story.start);
-    return "start";
-  }
-
-  function renderNode(nodeId) {
-    if (!activeStory) return;
-
-    var node = getNodeById(activeStory, nodeId);
-    activeNodeId = nodeId;
-
-    var title = getStoryTitle(activeStory);
-    var header = "Started: " + title;
-
-    if (!node) {
-      setGameText(
-        header,
-        "Missing node: <code>" + escapeHtml(nodeId) + "</code>"
-      );
-      return;
-    }
-
-    var text = node.text ? safeText(node.text) : "";
-    var html = "";
-
-    if (text) {
-      html += escapeHtml(text).replace(/\n/g, "<br>");
-    } else {
-      html += "<span class=\"vc-p vc-p--muted\">No text for this node.</span>";
-    }
-
-    var choices = Array.isArray(node.choices) ? node.choices : [];
-    if (choices.length) {
-      html += "<div class=\"vc-divider\" role=\"separator\" aria-hidden=\"true\"></div>";
-      html += "<div class=\"vc-stack\" aria-label=\"Choices\">";
-
-      for (var i = 0; i < choices.length; i++) {
-        var c = choices[i] || {};
-        var cText = safeText(c.text || ("Choice " + (i + 1)));
-        var to = safeText(c.to || "");
-
-        var disabledAttr = to ? "" : " disabled";
-        var disabledClass = to ? "" : " vc-btn--disabled";
-
-        html += ""
-          + "<button class=\"vc-btn" + disabledClass + "\" type=\"button\""
-          + " data-action=\"choose\""
-          + " data-to=\"" + escapeAttr(to) + "\""
-          + disabledAttr + ">"
-          + escapeHtml(cText)
-          + "</button>";
-      }
-
-      html += "</div>";
-    }
-
-    setGameText(header, html);
-    wireButtonsWithin(gameBody);
-  }
-
-  function loadSelectedStoryFile() {
-    activeStory = null;
-    activeNodeId = null;
-
-    if (!selectedStoryFile) {
-      setGameText(
-        "Started: " + (selectedStoryTitle || "Unknown Story"),
-        "No story file was provided for this selection."
-      );
-      return;
-    }
-
-    fetch(selectedStoryFile, { cache: "no-store" })
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
-      })
-      .then(function (story) {
-        activeStory = story || {};
-        var startId = getStartId(activeStory);
-        renderNode(startId);
-      })
-      .catch(function () {
-        setGameText(
-          "Started: " + (selectedStoryTitle || "Unknown Story"),
-          "Could not load story file: <code>" + escapeHtml(selectedStoryFile) + "</code>"
-        );
-      });
-  }
-
-  // ------------------------
-  // Init
-  // ------------------------
   function init() {
-    wireButtonsWithin(document);
-    showScreen("menu");
-    setSelectedStory(null, null, null);
+    // Footer version
+    const foot = $("footerVersion");
+    if (foot) safeText(foot, `VerseCraft v${APP_VERSION} • GitHub Pages • iOS Safari baseline`);
 
-    // New pipeline: Catalog -> Pack -> Stories
-    loadCatalogThenPack();
+    // Initial pill and screen
+    setPill({ mode: "screen", screen: "Menu" });
+    setScreen("Menu");
+
+    // Wire top menu button
+    wireButton("btnTopMenu", onMenu);
+
+    // Wire menu buttons
+    wireButton("btnLoadNewStory", onLoadNewStory);
+    wireButton("btnContinueStory", onContinueStory);
+    wireButton("btnSettings", onSettings);
+
+    // Wire catalog demo controls
+    wireButton("btnCatalogBack", onMenu);
+    wireButton("btnCatalogEnterGameDemo", onEnterGameDemo);
+
+    // Wire settings
+    wireButton("btnSettingsBack", onMenu);
+
+    // Debug panel toggle UI
+    const debugToggle = $("debugToggle");
+    if (debugToggle) {
+      debugToggle.checked = State.debug.enabled;
+      debugToggle.addEventListener("change", () => setDebugEnabled(debugToggle.checked));
+    }
+    renderDebug();
+
+    debugLog("App initialized", { version: APP_VERSION, debug: State.debug.enabled });
   }
 
+  // DOM ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
