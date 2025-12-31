@@ -9,7 +9,7 @@
       "storyId": "sample",
       "title": "Sample Story",
       "description": "A tiny two-path demo for Phase 3 testing.",
-      "entryFile": "./content/packs/starter/stories/sample.json",
+      "entryFile": "stories/sample.json",
       "cover": {
         "type": "remote",
         "path": "packs/starter/covers/sample.png"
