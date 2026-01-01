@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "storyId": "wasteland_story",
+    "title": "A Wasteland Story",
+    "author": "Original",
+    "publicDomain": false,
+    "category": "core",
+    "theme": "wasteland",
+    "version": "0.1.0",
+    "estimatedLength": "30–90 minutes",
+    "entryNode": "intro",
+    "tags": []
+  },
+  "nodes": {
+    "intro": {
+      "text": "The wind carries sand and ash across the broken highway. Somewhere ahead, a radio crackles—one weak signal in a dead world.",
+      "choices": [
+        {
+          "label": "Follow the radio signal",
+          "effects": {
+            "reputation": 1
+          },
+          "next": "ending_ambiguous_signal"
+        },
+        {
+          "label": "Scavenge the nearby wrecks",
+          "effects": {
+            "supplies": 1
+          },
+          "next": "ending_good_scavenge"
+        }
+      ]
+    },
+    "ending_good_scavenge": {
+      "text": "You find water sealed in glass and a blade still sharp enough to matter. In the wasteland, small wins are how people stay alive long enough to hope.",
+      "ending": {
+        "type": "good",
+        "summary": "You secure supplies and earn a fighting chance."
+      }
+    },
+    "ending_ambiguous_signal": {
+      "text": "You walk toward the signal until the static becomes almost words. Either it’s a survivor… or a trap built from memory.",
+      "ending": {
+        "type": "ambiguous",
+        "summary": "You commit to the unknown. The wasteland doesn’t reward certainty."
+      }
+    }
+  }
+}

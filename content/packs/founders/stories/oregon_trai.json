@@ -1,0 +1,4603 @@
+{
+  "id": "oregon_trail_painted_sky",
+  "title": "Oregon Trail: The Painted Sky",
+  "start": "1",
+  "module": {
+    "primaryResource": {
+      "name": "HP",
+      "min": 0,
+      "max": 15,
+      "failureSectionId": "TRAIL_DEATH"
+    },
+    "slotLabels": {
+      "weapon": "Tool",
+      "armor": "Clothing",
+      "special": "Item"
+    },
+    "loadout": {
+      "weapon": {
+        "id": "long_range_rifle",
+        "name": "Long-Range Rifle"
+      },
+      "armor": {
+        "id": "repaired_clothing",
+        "name": "Repaired Clothing"
+      },
+      "special": {
+        "id": "family_keepsake",
+        "name": "Family Keepsake"
+      }
+    }
+  },
+  "sections": [
+    {
+      "id": "1",
+      "text": "Independence falls away behind the wagon like a promise already spent.\n\nJim Root keeps a hand on the rail as the team leans into the first pull. The canvas smells of pitch and sun. Celeste Barlow stands close, bonnet ribbon tight, eyes steady. Jimmy walks with a stick he pretends is a staff. Sally and Genevieve hop down and climb back up again, unable to keep still.\n\nThe road opens. It does not explain itself.",
+      "choices": [
+        {
+          "label": "Buy supplies while you still can.",
+          "to": "2",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "name": "Dollar Pouch",
+                "qty": 400
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "rations",
+                "name": "Rations",
+                "qty": 6
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "bandages",
+                "name": "Bandages",
+                "qty": 2
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "clean_water",
+                "name": "Clean Water",
+                "qty": 2
+              }
+            }
+          ]
+        },
+        {
+          "label": "Leave at once and trust the road.",
+          "to": "2",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "name": "Dollar Pouch",
+                "qty": 400
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "rations",
+                "name": "Rations",
+                "qty": 4
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "clean_water",
+                "name": "Clean Water",
+                "qty": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "Take stock with Celeste before spending.",
+          "to": "2",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "name": "Dollar Pouch",
+                "qty": 400
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "rations",
+                "name": "Rations",
+                "qty": 5
+              }
+            },
+            {
+              "addItem": {
+                "category": "items",
+                "id": "trail_map",
+                "name": "Trail Map",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ],
+      "system": "Early impressions travel fast—among strangers, and among your own."
+    },
+    {
+      "id": "2",
+      "text": "The first miles crowd together. Wagons bunch. A tongue snaps ahead; everyone hears it.\n\nCeleste counts softly. Jimmy watches the horizon as if it might blink. Sally sings until Genevieve joins, then both laugh and stop at once when the sound of coughing drifts through camp.",
+      "choices": [
+        {
+          "label": "Keep a steady pace close to others.",
+          "to": "3",
+          "effects": [
+            {
+              "setFlag": "paceSteady"
+            }
+          ]
+        },
+        {
+          "label": "Push while the ground is easy.",
+          "to": "3",
+          "effects": [
+            {
+              "setFlag": "paceHard"
+            },
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hang back and let the rush pass.",
+          "to": "3",
+          "effects": [
+            {
+              "setFlag": "paceCautious"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "text": "Camp brings the first quiet. Fire pops. Canvas sighs.\n\nCeleste warms her hands. Jimmy stares at sparks. Sally complains of dust; Genevieve complains of Sally. Jim lets it pass. Everyone is afraid in their own way.",
+      "choices": [
+        {
+          "label": "Share the fire and trade news.",
+          "to": "4",
+          "effects": [
+            {
+              "setFlag": "neighborlyStart"
+            }
+          ]
+        },
+        {
+          "label": "Keep distance; sickness travels.",
+          "to": "4",
+          "effects": [
+            {
+              "setFlag": "cautiousWithStrangers"
+            }
+          ]
+        },
+        {
+          "label": "Set a night watch with Jimmy.",
+          "to": "4",
+          "effects": [
+            {
+              "setFlag": "nightWatchEarly"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "text": "Morning dew beads the canvas. Grit coats everything.\n\nA trader hawks needles, thread, and soap. He wants dollars.",
+      "choices": [
+        {
+          "label": "Buy small comforts.",
+          "to": "5",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "trade_goods_bundle",
+                "name": "Trade Goods Bundle",
+                "qty": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "Refuse and save money.",
+          "to": "5",
+          "effects": [
+            {
+              "setFlag": "tightPurse"
+            }
+          ]
+        },
+        {
+          "label": "Try to barter labor or advice.",
+          "to": "5",
+          "effects": [
+            {
+              "setFlag": "barterMindset"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "text": "The sun turns the prairie hard and bright.\n\nJimmy’s boots are scuffed thin. Celeste notices and says nothing. A hidden rut lurches the wagon. Small mishaps become long days.",
+      "choices": [
+        {
+          "label": "Stop and tighten every strap.",
+          "to": "6",
+          "effects": [
+            {
+              "setFlag": "carefulMaintenance"
+            }
+          ]
+        },
+        {
+          "label": "Fix only what fails.",
+          "to": "6",
+          "effects": [
+            {
+              "setFlag": "maintenanceMinimal"
+            }
+          ]
+        },
+        {
+          "label": "Teach Jimmy the checks.",
+          "to": "6",
+          "effects": [
+            {
+              "setFlag": "jimmyLearnsWagon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "text": "The first trouble is small: a headache, a wrong tiredness.\n\nSally says her stomach feels mean. Genevieve says she’s hungry. Jimmy goes quiet. Celeste touches Sally’s forehead.",
+      "choices": [
+        {
+          "label": "Make camp early and rest.",
+          "to": "7",
+          "effects": [
+            {
+              "hp": 1
+            },
+            {
+              "setFlag": "restEarly"
+            }
+          ]
+        },
+        {
+          "label": "Press on and watch closely.",
+          "to": "7",
+          "effects": [
+            {
+              "hp": -1
+            },
+            {
+              "setFlag": "pressedOnSick"
+            }
+          ]
+        },
+        {
+          "label": "Use a little medicine now.",
+          "to": "7",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "bandages",
+                "qty": 1
+              }
+            },
+            {
+              "setFlag": "earlyMedicine"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "text": "A shallow creek crosses the trail. Clear stones. Quiet current.\n\nJimmy watches you, learning what answers look like.",
+      "choices": [
+        {
+          "label": "Cross here while it’s shallow.",
+          "to": "8",
+          "effects": [
+            {
+              "setFlag": "crossedCreek"
+            }
+          ]
+        },
+        {
+          "label": "Scout the bank for the safest angle.",
+          "to": "8",
+          "effects": [
+            {
+              "setFlag": "scoutedCreek"
+            }
+          ]
+        },
+        {
+          "label": "Have Jimmy test the footing.",
+          "to": "8",
+          "effects": [
+            {
+              "setFlag": "jimmyTestedCreek"
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "text": "Night wind slips under blankets.\n\nCeleste pulls Genevieve close. Sally mutters. Jimmy pretends not to shiver. Stars look less like guidance and more like distance.",
+      "choices": [
+        {
+          "label": "Burn extra firewood.",
+          "to": "9",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "firewood_bundle",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Huddle and share warmth.",
+          "to": "9",
+          "effects": [
+            {
+              "setFlag": "huddledForWarmth"
+            }
+          ]
+        },
+        {
+          "label": "Wrap the children first.",
+          "to": "9",
+          "effects": [
+            {
+              "setFlag": "protectedChildrenFirst"
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ],
+      "system": "The trail doesn’t judge single mistakes. It judges patterns."
+    },
+    {
+      "id": "9",
+      "text": "A rider offers news—rivers, prices, sickness—and asks what you’ll spare.\n\nHis smile is practiced.",
+      "choices": [
+        {
+          "label": "Trade a little food for information.",
+          "to": "10",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "setFlag": "boughtInformation"
+            }
+          ]
+        },
+        {
+          "label": "Refuse and keep distance.",
+          "to": "10",
+          "effects": [
+            {
+              "setFlag": "refusedStrangerTrade"
+            }
+          ]
+        },
+        {
+          "label": "Let Celeste speak while you watch.",
+          "to": "10",
+          "effects": [
+            {
+              "setFlag": "celesteHandledStranger"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "text": "A trading post of wagons and ledgers. Prices bite. Names don’t matter.\n\nYou leave with what you can carry and what you can’t replace.",
+      "choices": [
+        {
+          "label": "Spend for food and medicine.",
+          "to": "11",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 40
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 3
+              }
+            },
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "healing_salve",
+                "name": "Healing Salve",
+                "qty": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "Save money for crossings.",
+          "to": "11",
+          "effects": [
+            {
+              "setFlag": "savedForLater"
+            }
+          ]
+        },
+        {
+          "label": "Buy tools for repairs.",
+          "to": "11",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 30
+              }
+            },
+            {
+              "addItem": {
+                "category": "items",
+                "id": "rope_coil",
+                "name": "Rope Coil",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "12",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "12",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "12",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "12",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "13",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "13",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "13",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "14",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "14",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "14",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "14",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "15",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "15",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "15",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "15",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "16",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "16",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "16",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "17",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "17",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "17",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "18",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "18",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "18",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Use opium to push through pain.",
+          "to": "18",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "opium",
+                "name": "Opium",
+                "qty": 1
+              }
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "19",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "19",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "19",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "20",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "20",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "20",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "text": "The plains teach routine. Days stack. Small choices weigh more than speeches.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "21",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "21",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "21",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "22",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "22",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "22",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "22",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "23",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "23",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "23",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "23",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "24",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "24",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "24",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "25",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "25",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "25",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "25",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "26",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "26",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "26",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "26",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "27",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "27",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "27",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "27",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "27",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "28",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "28",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "28",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "28",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "29",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "29",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "29",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "29",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "29",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "30",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "30",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "30",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "30",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "31",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "31",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "31",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "31",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "32",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "32",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "32",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "32",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "33",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "33",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "33",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "33",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "34",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "34",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "34",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "34",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "34",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "35",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "35",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "35",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Use opium to push through pain.",
+          "to": "35",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "opium",
+                "name": "Opium",
+                "qty": 1
+              }
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "35",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "36",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "36",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "36",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "36",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "36",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "37",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "37",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "37",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "37",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "38",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "38",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "38",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "38",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "39",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "39",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "39",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "39",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "40",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "40",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "40",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "40",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "40",
+      "text": "Rivers force decisions. Waiting costs hunger; crossing costs courage.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "41",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "41",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "41",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "41",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "42",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "42",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "42",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "42",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "43",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "43",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "43",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "43",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "43",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "44",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "44",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "44",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "44",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "45",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "45",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "45",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "45",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "45",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "46",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "46",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "46",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "46",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "47",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "47",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "47",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "47",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "48",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "48",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "48",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "48",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "49",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "49",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "49",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "49",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "50",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "50",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "50",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "50",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "50",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "51",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "51",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "51",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "51",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "52",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "52",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "52",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Use opium to push through pain.",
+          "to": "52",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "opium",
+                "name": "Opium",
+                "qty": 1
+              }
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "52",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "53",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "53",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "53",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "53",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "53",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "54",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "54",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "54",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "54",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "55",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "55",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "55",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "56",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "56",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "56",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "56",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "56",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "57",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "57",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "57",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "57",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "57",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "58",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "58",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "58",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "58",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "59",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "59",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "59",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "59",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "60",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "60",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "60",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "60",
+      "text": "After the crossing, loss becomes a ledger. Names are spoken softly.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "61",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "61",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "61",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "62",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "62",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "62",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "62",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "63",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "63",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "63",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "63",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "64",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "64",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "64",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "64",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "64",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "65",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "65",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "65",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "65",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "66",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "66",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "66",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "66",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "66",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "67",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "67",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "67",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "67",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "67",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "68",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "68",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "68",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "68",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "69",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "69",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "69",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Use opium to push through pain.",
+          "to": "69",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "opium",
+                "name": "Opium",
+                "qty": 1
+              }
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "69",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "70",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "70",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "70",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "70",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "71",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "71",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "71",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "71",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "71",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "72",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "72",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "72",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "72",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "73",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "73",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "73",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "73",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "74",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "74",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "74",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "74",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "75",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "75",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "75",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "75",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "76",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "76",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "76",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "76",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "77",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "77",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "77",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "77",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "78",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "78",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "78",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "78",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "78",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "78",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "79",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "79",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "79",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "79",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "79",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "80",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "80",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "80",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "80",
+      "text": "The mountains thin the air and the group. Warmth and will are rationed.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "81",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "81",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "81",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "81",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "82",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "82",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "82",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "82",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "83",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "83",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "83",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "83",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "84",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "84",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "84",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "84",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "85",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "85",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "85",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "85",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "85",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "86",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "86",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "86",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Use opium to push through pain.",
+          "to": "86",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "opium",
+                "name": "Opium",
+                "qty": 1
+              }
+            },
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "86",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "87",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "87",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "87",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "87",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "88",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "88",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "88",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "88",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "89",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "89",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "89",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "89",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "89",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "90",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "90",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "90",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "90",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "91",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "91",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "91",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "91",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "92",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "92",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "92",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "92",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "Buy passage or supplies at a stop.",
+          "to": "92",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "items",
+                "id": "dollar_pouch",
+                "qty": 20
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "92",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "93",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "93",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "93",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "93",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "94",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "94",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "94",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "94",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "95",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "95",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "95",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "95",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "96",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "96",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "96",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "96",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "97",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "97",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "97",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "97",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "98",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "98",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "98",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "98",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "99",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "99",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "99",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Hunt or scavenge nearby.",
+          "to": "99",
+          "effects": [
+            {
+              "addItem": {
+                "category": "consumables",
+                "id": "wild_game",
+                "name": "Wild Game",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "99",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "100",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "100",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "100",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        },
+        {
+          "label": "Repair the wagon where it stands.",
+          "to": "100",
+          "effects": [
+            {
+              "addItem": {
+                "category": "items",
+                "id": "spare_wagon_wheel",
+                "name": "Spare Wagon Wheel",
+                "qty": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "100",
+      "text": "Oregon draws near. What remains is what you chose to keep.",
+      "choices": [
+        {
+          "label": "Keep moving with care.",
+          "to": "100",
+          "effects": [
+            {
+              "hp": 0
+            }
+          ]
+        },
+        {
+          "label": "Spend resources to reduce risk.",
+          "to": "100",
+          "effects": [
+            {
+              "removeItem": {
+                "category": "consumables",
+                "id": "rations",
+                "qty": 1
+              }
+            },
+            {
+              "hp": 1
+            }
+          ]
+        },
+        {
+          "label": "Take a risk to save time.",
+          "to": "100",
+          "effects": [
+            {
+              "hp": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TRAIL_DEATH",
+      "text": "The trail takes everything. The wagon stands quiet beneath a painted sky. Names are remembered.",
+      "choices": [
+        {
+          "label": "Return to Main Menu",
+          "toMenu": true
+        }
+      ]
+    }
+  ]
+}

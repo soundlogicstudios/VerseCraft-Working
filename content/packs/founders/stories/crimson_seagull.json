@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "storyId": "crimson_seagull_ember_crown",
+    "title": "The Crimson Seagull and the Burning Ember Crown",
+    "author": "Original",
+    "publicDomain": false,
+    "category": "core",
+    "theme": "fantasy_pirate",
+    "version": "0.1.0",
+    "estimatedLength": "30–90 minutes",
+    "entryNode": "intro",
+    "tags": []
+  },
+  "nodes": {
+    "intro": {
+      "text": "Salt wind bites your lips as the Crimson Seagull cuts through dark water. Ahead, a sky like bruised velvet hangs over an island that shouldn’t exist—yet there it is, crowned in emberlight.",
+      "choices": [
+        {
+          "label": "Order full sail toward the island",
+          "effects": {
+            "reputation": 1
+          },
+          "next": "full_sail"
+        },
+        {
+          "label": "Circle the island and watch",
+          "effects": {
+            "morale": 1
+          },
+          "next": "cautious_circle"
+        }
+      ]
+    },
+    "full_sail": {
+      "text": "The crew moves fast. The sea changes color as you approach, black turning to molten red beneath the surface as if the ocean remembers fire.",
+      "choices": [
+        {
+          "label": "Prepare a landing party",
+          "effects": {
+            "supplies": -1
+          },
+          "next": "landing"
+        },
+        {
+          "label": "Keep everyone aboard and anchor off-shore",
+          "next": "anchor_offshore"
+        }
+      ]
+    },
+    "cautious_circle": {
+      "text": "You circle once. Twice. No birds. No waves breaking on the rocks. The silence feels deliberate, like a trap with manners.",
+      "choices": [
+        {
+          "label": "Land anyway",
+          "next": "landing"
+        },
+        {
+          "label": "Send a single skiff to scout",
+          "effects": {
+            "morale": -1
+          },
+          "next": "skiff_scout"
+        }
+      ]
+    },
+    "landing": {
+      "text": "Boots hit ash-colored sand. The air smells of warm metal. In the distance, something glows—like a crown set on a stone throne.",
+      "choices": [
+        {
+          "label": "Head straight for the glow",
+          "effects": {
+            "health": -1
+          },
+          "next": "ember_path"
+        },
+        {
+          "label": "Search the shoreline for signs",
+          "effects": {
+            "supplies": 1
+          },
+          "next": "shore_signs"
+        }
+      ]
+    },
+    "anchor_offshore": {
+      "text": "You anchor and wait. The island doesn’t move, doesn’t call. But the emberlight seems to pulse, as if it has a heartbeat that matches your own.",
+      "choices": [
+        {
+          "label": "Change your mind and land",
+          "next": "landing"
+        }
+      ]
+    },
+    "skiff_scout": {
+      "text": "The skiff glides in. For a moment you lose sight of it behind a jagged rock. When it returns, the scout won’t meet your eyes—and keeps rubbing ash from their palms.",
+      "choices": [
+        {
+          "label": "Demand the truth",
+          "effects": {
+            "reputation": 1
+          },
+          "next": "ending_ambiguous_warning"
+        },
+        {
+          "label": "Land with the whole crew now",
+          "next": "landing"
+        }
+      ]
+    },
+    "ember_path": {
+      "text": "The path climbs through cracked stone. Heat rises from beneath, gentle at first, then intimate—like a hand on your neck.",
+      "choices": [
+        {
+          "label": "Keep climbing",
+          "next": "ending_good_crown_seen"
+        }
+      ]
+    },
+    "shore_signs": {
+      "text": "You find footprints that don’t match any boot you know, pressed deep into ash like they were made by something heavier than a person should be.",
+      "choices": [
+        {
+          "label": "Follow the footprints inland",
+          "next": "ending_bad_followed"
+        },
+        {
+          "label": "Turn back and regroup",
+          "next": "ending_ambiguous_warning"
+        }
+      ]
+    },
+    "ending_good_crown_seen": {
+      "text": "You reach a ridge and see it—an Ember Crown, hovering above a stone altar, burning without fuel. The island isn’t a place. It’s a trial. And it has finally begun.",
+      "ending": {
+        "type": "good",
+        "summary": "You find the Ember Crown’s resting place and begin the true quest."
+      }
+    },
+    "ending_ambiguous_warning": {
+      "text": "You pause. The crew watches you for a decision that will become legend or regret. The emberlight pulses again, patient as fate.",
+      "ending": {
+        "type": "ambiguous",
+        "summary": "You delay the inevitable. The island waits, and so does the Crown."
+      }
+    },
+    "ending_bad_followed": {
+      "text": "You follow the footprints until the ash becomes too deep, then suddenly nothing—no sound, no wind, no crew behind you. Only emberlight and the feeling you’ve been separated on purpose.",
+      "ending": {
+        "type": "bad",
+        "summary": "You’re isolated by the island’s magic. The Crown’s trial turns hostile."
+      }
+    }
+  }
+}
