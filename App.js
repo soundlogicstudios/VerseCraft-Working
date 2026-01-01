@@ -17,7 +17,7 @@
     const MENU_SKIN_SAVE_URL = "./backgrounds/ui/VerseCraft_Menu_save.webp";
     const MENU_SKIN_NOSAVE_URL = "./backgrounds/ui/VerseCraft_Menu_nosave.webp";
   // Continue shimmer overlay (Phase 1)
-  const CONTINUE_SHIMMER_OVERLAY_URL = "./backgrounds/ui/VerseCraft_Continue_Shimmer.webp";
+  const CONTINUE_SHIMMER_OVERLAY_URL = "./backgrounds/ui/VerseCraft_Continue_shimmer.webp";
   const MENU_SHIMMER_FLAG_KEY = "versecraft.menuHadSave.v1";
 
 const CATALOG_URL = CONTENT_ROOT + "Catalog.json";
