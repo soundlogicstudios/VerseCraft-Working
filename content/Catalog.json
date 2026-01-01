@@ -1,0 +1,38 @@
+{
+  "version": "1.0.1",
+  "title": "VerseCraft Catalog",
+  "packs": [
+    {
+      "id": "starter",
+      "title": "Starter Pack",
+      "description": "Free starter stories for testing and onboarding.",
+      "visibility": "public",
+      "price": {
+        "type": "free"
+      },
+      "packVersion": "1.0.0",
+      "packJson": "./content/packs/starter/Pack.json",
+      "manifest": {
+        "type": "local",
+        "path": "./content/packs/starter/Pack.json"
+      }
+    },
+    {
+      "id": "founders",
+      "title": "Founders Bundle",
+      "description": "Launch collection (World of Lorecraft is free; the rest are included in the Founders Bundle).",
+      "visibility": "public",
+      "price": {
+        "type": "bundle",
+        "amount": 9.99,
+        "currency": "USD"
+      },
+      "packVersion": "1.0.0",
+      "packJson": "./content/packs/founders/Pack.json",
+      "manifest": {
+        "type": "local",
+        "path": "./content/packs/founders/Pack.json"
+      }
+    }
+  ]
+}
