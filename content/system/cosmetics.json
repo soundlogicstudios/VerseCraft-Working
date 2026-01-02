@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0",
+  "defaults": {
+    "activeThemeId": "theme_parchment"
+  },
+  "themes": [
+    {
+      "id": "theme_parchment",
+      "displayName": "Parchment",
+      "assets": {
+        "screenBackground": "backgrounds/ui/ui_parchment.webp"
+      },
+      "ui": {
+        "overlay": {
+          "type": "linear",
+          "from": "rgba(0,0,0,0.25)",
+          "to": "rgba(0,0,0,0.45)"
+        },
+        "accent": {
+          "primary": "#7C6DFF"
+        }
+      },
+      "unlock": {
+        "mode": "default"
+      }
+    },
+    {
+      "id": "theme_obsidian",
+      "displayName": "Obsidian",
+      "assets": {
+        "screenBackground": "backgrounds/ui/ui_obsidian.webp"
+      },
+      "ui": {
+        "overlay": {
+          "type": "linear",
+          "from": "rgba(0,0,0,0.35)",
+          "to": "rgba(0,0,0,0.60)"
+        },
+        "accent": {
+          "primary": "#6FA3C7"
+        }
+      },
+      "unlock": {
+        "mode": "xp",
+        "currencyKey": "GLOBAL_XP",
+        "required": 50
+      }
+    },
+    {
+      "id": "theme_arcane",
+      "displayName": "Arcane",
+      "assets": {
+        "screenBackground": "backgrounds/ui/ui_arcane.webp"
+      },
+      "ui": {
+        "overlay": {
+          "type": "vignette",
+          "strength": 0.55
+        },
+        "accent": {
+          "primary": "#7C6DFF",
+          "secondary": "#4ED1FF"
+        }
+      },
+      "unlock": {
+        "mode": "xp",
+        "currencyKey": "GLOBAL_XP",
+        "required": 100
+      }
+    },
+    {
+      "id": "theme_wasteland",
+      "displayName": "Wasteland",
+      "assets": {
+        "screenBackground": "backgrounds/ui/ui_wasteland.webp"
+      },
+      "ui": {
+        "overlay": {
+          "type": "linear",
+          "from": "rgba(0,0,0,0.30)",
+          "to": "rgba(0,0,0,0.55)"
+        },
+        "accent": {
+          "primary": "#D47A3C"
+        }
+      },
+      "unlock": {
+        "mode": "xp",
+        "currencyKey": "GLOBAL_XP",
+        "required": 150
+      }
+    },
+    {
+      "id": "theme_sterile",
+      "displayName": "Sterile",
+      "assets": {
+        "screenBackground": "backgrounds/ui/ui_sterile.webp"
+      },
+      "ui": {
+        "overlay": {
+          "type": "linear",
+          "from": "rgba(0,0,0,0.10)",
+          "to": "rgba(0,0,0,0.22)"
+        },
+        "accent": {
+          "primary": "#5FA8D3",
+          "secondary": "#6BCF9D"
+        }
+      },
+      "unlock": {
+        "mode": "xp",
+        "currencyKey": "GLOBAL_XP",
+        "required": 200
+      }
+    }
+  ]
+}
