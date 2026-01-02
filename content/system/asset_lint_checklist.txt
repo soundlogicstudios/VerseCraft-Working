@@ -1,1 +1,9 @@
-Lint: All asset filenames must be lowercase and must exactly match referenced paths (Linux and GitHub Pages safe).
+ASSET LINT (ONE-LINE): all asset paths are lowercase, webp, and load via a direct ./backgrounds/... or ./icons/... path that matches the repo exactly (case-sensitive).
+
+CHECKLIST
+- Filenames: lowercase only (a–z, 0–9, hyphen), no spaces, no capitals.
+- Format: .webp for backgrounds; transparent .png for icons (unless you intentionally need webp).
+- Dimensions: backgrounds exported portrait and intended to cover (no inset border/margins baked into the image).
+- Paths: cosmetics.json references must match the file path exactly (Linux case-sensitive).
+- No “stacked collage” exports: each theme is a single standalone image file.
+- Visual safety: avoid bright hotspots behind large white headers; if needed, add a subtle dark overlay behind text in UI (CSS), not baked into the background.
