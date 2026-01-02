@@ -1,0 +1,2 @@
+VerseCraft Asset Lint Checklist (one-line):
+lowercase file + folder names; no spaces; prefer .webp for raster UI backgrounds; paths must match repo exactly (case-sensitive); backgrounds are portrait 9:16-ish and used with CSS background-size: cover; commit + verify the GitHub Pages URL loads; update cosmetics.json whenever you add/rename assets.
