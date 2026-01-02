@@ -1,0 +1,1 @@
+Lint: All asset filenames must be lowercase and must exactly match referenced paths (Linux and GitHub Pages safe).
