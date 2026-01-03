@@ -1,0 +1,57 @@
+
+/* Styles_phase4C4_modal_alignment.css
+   Purpose: Align modal visuals with touch hitboxes on iOS Safari
+   Scope: Modal-only. Does not affect menu, settings, catalog, or story UI.
+*/
+
+.vc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+}
+
+.vc-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vc-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.vc-modal-panel {
+  position: relative;
+  width: min(92vw, 420px);
+  border-radius: 16px;
+  background: rgba(20,20,24,0.92);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  padding: 20px 20px 72px 20px; /* bottom space reserved for Close bar */
+}
+
+/* Close bar: full-width, bottom-anchored, no transforms */
+.vc-modal-close {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  height: 48px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #2b2e38, #1f222b);
+  color: #fff;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+/* Increase tappable area without visual shift */
+.vc-modal-close::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+}
