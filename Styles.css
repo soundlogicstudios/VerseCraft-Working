@@ -1,0 +1,219 @@
+/* ==========================================================
+   VerseCraft — Clean Foundation
+   STEP 1: Modal Interaction Hardening (iOS Safari)
+   FULL FILE REPLACEMENT
+   ========================================================== */
+
+/* Respect the HTML hidden attribute */
+[hidden]{ display:none !important; }
+
+/* ---------- Root Tokens ---------- */
+:root{
+  --vv-top: 0px;
+  --vv-left: 0px;
+  --vv-width: 100vw;
+  --vv-height: 100vh;
+
+  --vc-primary-opaque: #7c5cff;
+  --vc-primary-opaque-hi: #8b74ff;
+  --vc-primary-opaque-lo: #6b4bff;
+
+  --vc-secondary-opaque-hi: #3c3380;
+  --vc-secondary-opaque-lo: #2a235e;
+
+  --vc-chip-opaque: #171a31;
+  --vc-utility-opaque-hi: #2b2f4f;
+  --vc-utility-opaque-lo: #1a1d35;
+
+  --bg0:#070814;
+  --bg1:#0b1026;
+
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.65);
+  --stroke: rgba(255,255,255,.12);
+  --shadow: 0 16px 40px rgba(0,0,0,.35);
+  --radius: 18px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; padding:0; }
+
+body{
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui;
+  color: var(--text);
+  background:
+    radial-gradient(1000px 600px at 50% 5%, rgba(124,92,255,.28), transparent 70%),
+    linear-gradient(180deg, var(--bg1), var(--bg0));
+  overflow: hidden;
+}
+
+/* ---------- Global Scroll Lock ---------- */
+body.vc-scroll-locked{
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* ---------- App Root ---------- */
+#app{
+  height: 100dvh;
+  display:flex;
+  flex-direction:column;
+  padding: env(safe-area-inset-top) 18px env(safe-area-inset-bottom);
+}
+
+/* ---------- Screens ---------- */
+.screens{
+  flex:1;
+  position:relative;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.vc-menu-active .screens{ overflow:hidden; }
+
+.screen{
+  display:none;
+  padding-bottom:22px;
+}
+.screen.active{ display:block; }
+
+/* ==========================================================
+   MODAL — HARD GUARANTEE INTERACTION LAYER
+   ========================================================== */
+
+/* When modal is visible, EVERYTHING behind it becomes inert */
+body.vc-modal-open *{
+  pointer-events: none !important;
+}
+
+/* Re-enable interaction ONLY for the modal */
+body.vc-modal-open .modal-backdrop,
+body.vc-modal-open .modal-backdrop *,
+body.vc-modal-open .modal,
+body.vc-modal-open .modal *{
+  pointer-events: auto !important;
+}
+
+/* ---------- Modal Backdrop ---------- */
+.modal-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+}
+
+/* ---------- Modal Panel ---------- */
+.modal{
+  width:100%;
+  max-width:520px;
+  background: rgba(20,20,30,.95);
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.modal-title{
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.modal-text{
+  font-size:16px;
+  line-height:1.35;
+  margin-bottom:14px;
+}
+
+.modal-actions{
+  display:flex;
+}
+
+.modal-btn{
+  width:100%;
+  min-height:52px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  font-weight:900;
+  font-size:16px;
+  touch-action: manipulation;
+}
+
+/* ==========================================================
+   MENU SKIN (unchanged behavior, safe for modal)
+   ========================================================== */
+
+:root{
+  --vc-menu-skin-url: url("./backgrounds/ui/VerseCraft_Menu_nosave.webp");
+}
+
+#screen-menu{
+  position:relative;
+}
+
+.vc-menu-skin{
+  position: fixed;
+  inset: 0;
+  background-image: var(--vc-menu-skin-url);
+  background-size: cover;
+  background-position: center;
+  pointer-events:none;
+  z-index:0;
+}
+
+.vc-menu-overlay{
+  position: fixed;
+  inset: 0;
+  z-index:2;
+  pointer-events:auto;
+  touch-action: manipulation;
+}
+
+.vc-skin-btn{
+  position:absolute;
+  left:10%;
+  width:80%;
+  height:7%;
+  background:transparent;
+  border:none;
+  color:transparent;
+  touch-action: manipulation;
+}
+
+/* Button positions */
+#btnLoadNew{ top:41%; }
+#btnContinue{ top:52%; }
+#btnSettings{ top:63%; }
+
+/* ==========================================================
+   Orientation Guard (unchanged)
+   ========================================================== */
+
+.vc-orientation-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.35);
+}
+body.vc-landscape .screens{ pointer-events:none; }
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+
+.footer{
+  text-align:center;
+  color: rgba(255,255,255,.55);
+  font-size:16px;
+  padding-bottom: env(safe-area-inset-bottom);
+}
