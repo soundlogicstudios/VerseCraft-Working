@@ -1,0 +1,19 @@
+{
+  "schema": "versecraft.skin.registry.v1",
+  "activeSkinId": "balanced-gold-astral",
+  "skins": [
+    {
+      "id": "balanced-gold-astral",
+      "title": "Balanced Gold Astral",
+      "version": "1.0",
+      "unlocked": true
+    },
+    {
+      "id": "obsidian-astral",
+      "title": "Obsidian Astral",
+      "version": "1.0",
+      "unlocked": false,
+      "lockedReason": "Requires Pack: Deluxe"
+    }
+  ]
+}
